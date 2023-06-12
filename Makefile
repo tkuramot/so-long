@@ -3,7 +3,7 @@ CFLAGS = -Wall -Wextra -Werror
 INCLUDE = -I $(LIBFT_PATH) -I $(MLX_PATH)
 LIBRARY = -L $(MLX_PATH) -l $(MLX) -L $(LIBFT_PATH) -l $(LIBFT) \
 	-L/usr/X11R6/lib -lX11 -lXext
-SRCS = main.c
+SRCS = event.c
 LIBFT = ft
 LIBFT_PATH = libft
 MLX_PATH = mlx
@@ -28,7 +28,7 @@ fclean: clean
 
 re: fclean all
 
-test: re
+test: $(NAME)
 	./$(NAME)
 
 .PHONY: bonus clean fclean re all
