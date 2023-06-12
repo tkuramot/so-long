@@ -15,7 +15,7 @@ $(NAME):
 	make -C $(LIBFT_PATH)
 	make -C $(MLX_PATH)
 	cp $(MLX_PATH)/libmlx.dylib .
-	$(CC) $(CFLAGS) $(SRCS) $(INCLUDE) $(LIBRARY) -framework OpenGL -framework AppKit -o $(NAME)
+	$(CC) $(CFLAGS) $(SRCS) $(INCLUDE) $(LIBRARY) -framework OpenGL -framework AppKit -o $@
 
 clean:
 	make -C $(LIBFT_PATH) clean
@@ -27,5 +27,8 @@ fclean: clean
 	$(RM) $(NAME)
 
 re: fclean all
+
+test: re
+	./$(NAME)
 
 .PHONY: bonus clean fclean re all
