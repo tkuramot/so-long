@@ -6,7 +6,7 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 12:24:05 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/06/16 15:27:36 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/06/16 16:33:02 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,11 @@ static t_map	*read_map(int fd)
 	if (!map)
 		return (NULL);
 	line = get_next_line(fd);
-	while (!line)
+	while (line)
 	{
-		ft_lstadd_back(map->grid, ft_lstnew(line));
+		if (line[ft_strlen_s(line) - 1] == '\n')
+			line[ft_strlen_s(line) - 1] = '\0';
+		ft_lstadd_back(&map->grid, ft_lstnew(line));
 		line = get_next_line(fd);
 	}
 	return (map);

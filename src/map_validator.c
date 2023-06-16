@@ -16,10 +16,8 @@
 // EXIT, COLLECTIBLE and PLAYER is solely included
 static bool	has_valid_chars_helper(unsigned char *all_chars)
 {
-	bool	is_valid;
 	size_t	c;
 
-	is_valid = true;
 	c = 0;
 	while (c < UCHAR_MAX + 1)
 	{
@@ -27,10 +25,9 @@ static bool	has_valid_chars_helper(unsigned char *all_chars)
 			return (false);
 		c++;
 	}
-	is_valid &= (all_chars[EXIT] == 1);
-	is_valid &= (all_chars[COLLECTIBLE] == 1);
-	is_valid &= (all_chars[PLAYER] == 1);
-	return (is_valid);
+	return ((all_chars[EXIT] == 1)
+		&& (all_chars[COLLECTIBLE] == 1)
+		&& (all_chars[PLAYER] == 1));
 }
 
 // Check whether the map has all available chars
@@ -42,7 +39,7 @@ static bool	has_valid_chars(t_map *map)
 	char			*s;
 
 	ft_bzero(all_chars, sizeof (unsigned char) * (UCHAR_MAX + 1));
-	node = *(map->grid);
+	node = map->grid;
 	while (node)
 	{
 		s = (char *)(node->content);
@@ -61,7 +58,7 @@ static bool	has_valid_rows_and_columns(t_map *map)
 	size_t	columns;
 	size_t	rows;
 
-	node = *(map->grid);
+	node = map->grid;
 	columns = ft_strlen_s((char *)node->content);
 	rows = 1;
 	while (node)
@@ -69,6 +66,7 @@ static bool	has_valid_rows_and_columns(t_map *map)
 		if (columns != ft_strlen_s((char *)node->content))
 			return (false);
 		rows++;
+		node = node->next;
 	}
 	map->columns = columns;
 	map->rows = rows;
@@ -77,13 +75,8 @@ static bool	has_valid_rows_and_columns(t_map *map)
 
 bool	is_valid_map(t_map *map)
 {
-	bool	is_valid;
-
-	is_valid = true;
-	ft_printf("aaaaaaaaaaaaaaaaaaa\n");
-	is_valid &= has_valid_rows_and_columns(map);
-	is_valid &= has_valid_chars(map);
-	is_valid &= is_surrounded_by_walls(map);
-	is_valid &= is_playable(map);
-	return (is_valid);
+	return (has_valid_rows_and_columns(map)
+		&& has_valid_chars(map)
+		&& is_surrounded_by_walls(map)
+		&& is_playable(map));
 }

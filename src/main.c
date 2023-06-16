@@ -6,7 +6,7 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 15:18:43 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/06/16 15:24:40 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/06/16 16:28:53 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,6 @@ int	main(void)
 	// ft_printf("%d\n", img_width);
 	// mlx_put_image_to_window(vars.mlx, vars.win, lava_img, 0, 0);
 	// mlx_loop(vars.mlx);
-	ft_printf("%d\n", parse_map("./maps/map.ber"));
+	ft_printf("%p\n", parse_map("./maps/map.ber"));
 	return (0);
 }
