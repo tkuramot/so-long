@@ -14,12 +14,12 @@
 
 // Check whether only valid chars are included and
 // EXIT, COLLECTIBLE and PLAYER is solely included
-static bool	has_valid_chars(unsigned char *all_chars)
+static bool	has_valid_chars_helper(unsigned char *all_chars)
 {
-	bool	ok;
+	bool	is_valid;
 	size_t	c;
 
-	ok = true;
+	is_valid = true;
 	c = 0;
 	while (c < UCHAR_MAX + 1)
 	{
@@ -27,10 +27,10 @@ static bool	has_valid_chars(unsigned char *all_chars)
 			return (false);
 		c++;
 	}
-	ok &= (all_chars[EXIT] == 1);
-	ok &= (all_chars[COLLECTIBLE] == 1);
-	ok &= (all_chars[PLAYER] == 1);
-	return (ok);
+	is_valid &= (all_chars[EXIT] == 1);
+	is_valid &= (all_chars[COLLECTIBLE] == 1);
+	is_valid &= (all_chars[PLAYER] == 1);
+	return (is_valid);
 }
 
 // Check whether the map has all available chars
@@ -47,20 +47,32 @@ static bool	has_valid_chars(t_map *map)
 	{
 		s = (char *)(node->content);
 		while (*s)
-			all_chars[*(s++)] += 1;
+			all_chars[(size_t)(*(s++))] += 1;
 		node = node->next;
 	}
-	return (has_valid_chars(all_chars));
-}
-
-static bool	is_surrounded_by_walls(t_map *map)
-{
+	return (has_valid_chars_helper(all_chars));
 }
 
 // Check whether the grid is rectangle
 // If it is, update map->rows and map->columns
 static bool	has_valid_rows_and_columns(t_map *map)
 {
+	t_list	*node;
+	size_t	columns;
+	size_t	rows;
+
+	node = *(map->grid);
+	columns = ft_strlen_s((char *)node->content);
+	rows = 1;
+	while (node)
+	{
+		if (columns != ft_strlen_s((char *)node->content))
+			return (false);
+		rows++;
+	}
+	map->columns = columns;
+	map->rows = rows;
+	return (true);
 }
 
 bool	is_valid_map(t_map *map)
@@ -68,6 +80,7 @@ bool	is_valid_map(t_map *map)
 	bool	is_valid;
 
 	is_valid = true;
+	ft_printf("aaaaaaaaaaaaaaaaaaa\n");
 	is_valid &= has_valid_rows_and_columns(map);
 	is_valid &= has_valid_chars(map);
 	is_valid &= is_surrounded_by_walls(map);

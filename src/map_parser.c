@@ -6,7 +6,7 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 12:24:05 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/06/16 13:16:08 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/06/16 15:27:36 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ t_map	*parse_map(char *map_file)
 	if (fd < 0)
 		return (NULL);
 	map = read_map(fd);
-	count_rows_and_columns(map);
 	if (!is_valid_map(map))
 		return (NULL);
 	return (map);
