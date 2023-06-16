@@ -6,46 +6,61 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 12:56:45 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/06/16 13:53:14 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/06/16 13:50:54tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
+// Check whether only valid chars are included and
+// EXIT, COLLECTIBLE and PLAYER is solely included
+static bool	has_valid_chars(unsigned char *all_chars)
+{
+	bool	ok;
+	size_t	c;
+
+	ok = true;
+	c = 0;
+	while (c < UCHAR_MAX + 1)
+	{
+		if (!ft_strchr("01CEP", c) && all_chars[c] > 0)
+			return (false);
+		c++;
+	}
+	ok &= (all_chars[EXIT] == 1);
+	ok &= (all_chars[COLLECTIBLE] == 1);
+	ok &= (all_chars[PLAYER] == 1);
+	return (ok);
+}
+
 // Check whether the map has all available chars
 // and does not include invalid ones;
 static bool	has_valid_chars(t_map *map)
 {
-	size_t	index;
-	t_list	*node;
-	int		all_chars;
+	unsigned char	all_chars[UCHAR_MAX];
+	t_list			*node;
+	char			*s;
 
+	ft_bzero(all_chars, sizeof (unsigned char) * (UCHAR_MAX + 1));
 	node = *(map->grid);
-	all_chars = 0;
 	while (node)
 	{
-		index = 0;
-		while (index < ft_strlen_s(node->content))
-			update_chars(((char *)(node->content))[index++], &all_chars);
+		s = (char *)(node->content);
+		while (*s)
+			all_chars[*(s++)] += 1;
 		node = node->next;
 	}
-	return (!(all_chars ^ 0b011111));
+	return (has_valid_chars(all_chars));
 }
 
-static void	update_chars(char c, int *all_chars)
+static bool	is_surrounded_by_walls(t_map *map)
 {
-	if (c == EMPTY)
-		*all_chars |= EMPTY_BIT;
-	else if (c == WALL)
-		*all_chars |= WALL_BIT;
-	else if (c == COLLECTIBLE)
-		*all_chars |= COLLECTIBLE_BIT;
-	else if (c == EXIT)
-		*all_chars |= EXIT_BIT;
-	else if (c == PLAYER)
-		*all_chars |= PLAYER_BIT;
-	else
-		*all_chars |= OTHER_BIT;
+}
+
+// Check whether the grid is rectangle
+// If it is, update map->rows and map->columns
+static bool	has_valid_rows_and_columns(t_map *map)
+{
 }
 
 bool	is_valid_map(t_map *map)

@@ -6,7 +6,7 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 12:00:30 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/06/16 13:39:59 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/06/16 14:49:22 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,15 +30,6 @@ typedef enum e_type {
 	EXIT = 'E',
 	PLAYER = 'P'
 }			t_type;
-
-typedef enum e_type_bit {
-	EMPTY_BIT = 1 << 0,
-	WALL_BIT = 1 << 1,
-	COLLECTIBLE_BIT = 1 << 2,
-	EXIT_BIT = 1 << 3,
-	PLAYER_BIT = 1 << 4,
-	OTHER_BIT = 1 << 5
-}			t_type_bit;
 
 typedef struct s_vars
 {
