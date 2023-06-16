@@ -60,7 +60,7 @@ static bool	has_valid_rows_and_columns(t_map *map)
 
 	node = map->grid;
 	columns = ft_strlen_s((char *)node->content);
-	rows = 1;
+	rows = 0;
 	while (node)
 	{
 		if (columns != ft_strlen_s((char *)node->content))

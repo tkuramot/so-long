@@ -6,7 +6,7 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 12:00:30 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/06/16 15:48:44 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/06/16 16:47:01 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@
 # include <mlx.h>
 # include <fcntl.h>
 
-# define EMPTY_TEXTURE e
+# define BLOCK_SIZE 64
+# define EMPTY_TEXTURE "path.png"
 # define WALL_TEXTURE w
 # define COLLECTIBLE_TEXTURE c
 # define EXIT_TEXTURE e
@@ -58,6 +59,15 @@ typedef struct s_point
 	int		x;
 	int		y;
 }			t_point;
+
+typedef struct s_textures
+{
+	void	*empty;
+	void	*wall;
+	void	*collectible;
+	void	*exit;
+	void	*player;
+}				t_textures;
 
 t_map		*parse_map(char *map_file);
 bool		is_valid_map(t_map *map);

@@ -12,9 +12,10 @@ MLX = mlx
 
 all: $(NAME)
 
-$(NAME): $(addprefix src/, $(OBJS)) $(MLX)
+$(NAME): $(addprefix src/, $(OBJS))
 	make bonus -C $(LIBFT_PATH)
 	make -C $(MLX_PATH)
+	cp $(MLX_PATH)/libmlx.dylib .
 	$(CC) $(CFLAGS) $(addprefix src/, $(OBJS)) $(INCLUDE) $(LIBRARY) -framework OpenGL -framework AppKit -o $@
 
 .c.o: $(addprefix src/, $(OBJS))
@@ -23,16 +24,13 @@ $(NAME): $(addprefix src/, $(OBJS)) $(MLX)
 clean:
 	make -C $(LIBFT_PATH) clean
 	make -C $(MLX_PATH) clean
-	$(RM) $(OBJS) $(B_SRCS:.c=.o) libmlx.dylib
+	$(RM) $(addprefix src/, $(OBJS)) libmlx.dylib
 
 fclean: clean
 	make -C $(LIBFT_PATH) fclean
 	$(RM) $(NAME)
 
 re: fclean all
-
-$(MLX):
-	cp $(MLX_PATH)/libmlx.dylib .
 
 test: $(NAME)
 	./$(NAME)
