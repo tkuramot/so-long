@@ -35,17 +35,14 @@ static bool	has_valid_chars_helper(unsigned char *all_chars)
 static bool	has_valid_chars(t_map *map)
 {
 	unsigned char	all_chars[UCHAR_MAX];
-	t_list			*node;
+	size_t			index;
 	char			*s;
 
 	ft_bzero(all_chars, sizeof (unsigned char) * (UCHAR_MAX + 1));
-	node = map->grid;
-	while (node)
+	while (index < map->rows)
 	{
-		s = (char *)(node->content);
 		while (*s)
 			all_chars[(size_t)(*(s++))] += 1;
-		node = node->next;
 	}
 	return (has_valid_chars_helper(all_chars));
 }
