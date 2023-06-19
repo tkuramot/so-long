@@ -6,7 +6,7 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 12:24:05 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/06/19 16:18:24 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/06/19 18:08:46 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static char	**read_file(int fd, size_t row_idx)
 
 	row = get_next_line(fd);
 	if (!row)
-		return ((char **)ft_calloc(sizeof (char *), row_idx + 1));
+		return ((char **)ft_calloc(row_idx + 1, sizeof (char *)));
 	grid = read_file(fd, row_idx + 1);
 	if (!grid)
 	{

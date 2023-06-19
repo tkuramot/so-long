@@ -6,7 +6,7 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 12:00:30 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/06/19 14:01:56 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/06/19 18:26:45 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@
 # include <fcntl.h>
 
 # define BLOCK_SIZE 32
-# define EMPTY_PATH "./textures/tiles/empty.png"
-# define WALL_PATH "./textures/tiles/wall.png"
-# define COLLECTIBLE_PATH "./textures/tiles/collectible.png"
-# define EXIT_PATH "./textures/tiles/wall.png"
-# define PLAYER_PATH "./textures/tiles/player.png"
+# define EMPTY_PATH "./textures/tiles/empty.xpm"
+# define WALL_PATH "./textures/tiles/wall.xpm"
+# define COLLECTIBLE_PATH "./textures/tiles/collectible.xpm"
+# define EXIT_PATH "./textures/tiles/wall.xpm"
+# define PLAYER_PATH "./textures/sprites/player.xpm"
 
 typedef enum e_char {
 	EMPTY = '0',
@@ -73,8 +73,10 @@ t_map			*parse_map(char *map_file);
 bool			is_valid_map(t_map *map);
 bool			is_surrounded_by_walls(t_map *map);
 bool			is_playable(t_map *map);
-void			my_mlx_pixel_put(t_data *data, int x, int y, int color);
 t_textures		*load_textures(t_vars	*vars);
-void			put_img_to_window(t_vars *vars, void *texture, int x, int y);
+void			put_map_to_window(t_vars *vars, t_textures *textures, t_map *map);
+t_point			get_point(int x, int y);
+void			**calloc_2d_array(size_t n_2d, size_t n_1d, size_t siz);
+void			free_2d_array(void **array, size_t n);
 
 #endif

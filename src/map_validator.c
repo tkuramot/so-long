@@ -65,7 +65,6 @@ static bool	has_valid_chars(t_map *map)
 	row_idx = 0;
 	while (row_idx < map->row)
 	{
-		ft_printf("%s", map->grid[row_idx]);
 		column_idx = 0;
 		while (column_idx < map->column)
 		{

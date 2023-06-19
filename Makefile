@@ -43,7 +43,8 @@ CFLAGS = -Wall -Wextra -Werror
 INCLUDE = -I $(LIBFT_PATH)/include -I $(MLX_PATH)
 LIBRARY = -L $(MLX_PATH) -l $(MLX) -L $(LIBFT_PATH) -l $(LIBFT) \
 	-L/usr/X11R6/lib -lX11 -lXext
-SRCS = main.c map_parser.c map_validator.c map_validator_helper.c
+SRCS = main.c map_parser.c map_validator.c map_validator_helper.c \
+	texture_loader.c put_image.c utils.c
 OBJS = $(SRCS:.c=.o)
 LIBFT = ft
 LIBFT_PATH = ./lib/libft
@@ -70,5 +71,8 @@ fclean: clean
 	$(RM) $(NAME)
 
 re: fclean all
+
+test: $(NAME)
+	./$(NAME)
 
 .PHONY: bonus clean fclean re all
