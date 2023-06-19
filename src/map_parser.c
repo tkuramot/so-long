@@ -6,28 +6,28 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 12:24:05 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/06/19 13:28:09 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/06/19 14:10:15 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
 // Read map line by line till the eof
-static char	**read_file(int fd, int count)
+static char	**read_file(int fd, size_t row_idx)
 {
 	char	**grid;
 	char	*row;
 
 	row = get_next_line(fd);
 	if (!row)
-		return ((char **)ft_calloc(sizeof (char *), count + 1));
-	grid = read_file(fd, count + 1);
+		return ((char **)ft_calloc(sizeof (char *), row_idx + 1));
+	grid = read_file(fd, row_idx + 1);
 	if (!grid)
 	{
 		free(row);
 		return (NULL);
 	}
-	grid[count] = row;
+	grid[row_idx] = row;
 	return (grid);
 }
 
@@ -41,6 +41,9 @@ t_map	*parse_map(char *map_file)
 		return (NULL);
 	map = (t_map *)ft_calloc(1, sizeof (t_map));
 	if (!map)
+		return (NULL);
+	map->grid = read_file(fd, 0);
+	if (!map->grid)
 		return (NULL);
 	if (!is_valid_map(map))
 		return (NULL);

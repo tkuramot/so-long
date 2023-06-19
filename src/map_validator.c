@@ -12,61 +12,82 @@
 
 #include "so_long.h"
 
+bool	is_surrounded_by_walls(t_map *map)
+{
+	size_t	row_idx;
+	size_t	column_idx;
+
+	row_idx = 0;
+	column_idx = 0;
+	while (column_idx < map->column)
+	{
+		if (map->grid[0][column_idx] != WALL
+			|| map->grid[map->row][column_idx] != WALL)
+			return (false);
+		column_idx++;
+	}
+	while (row_idx < map->row)
+	{
+		if ((map->grid[row_idx][0] != WALL)
+			|| (map->grid[row_idx][map->column - 1] != WALL))
+			return (false);
+		row_idx++;
+	}
+	return (true);
+}
+
 // Check whether only valid chars are included and
 // EXIT, COLLECTIBLE and PLAYER is solely included
-static bool	has_valid_chars_helper(unsigned char *all_chars)
+static bool	has_valid_chars_helper(unsigned char *charset)
 {
 	size_t	c;
 
 	c = 0;
 	while (c < UCHAR_MAX + 1)
 	{
-		if (!ft_strchr("01CEP", c) && all_chars[c] > 0)
+		if (!ft_strchr("01CEP", c) && charset[c] > 0)
 			return (false);
 		c++;
 	}
-	return ((all_chars[EXIT] == 1)
-		&& (all_chars[COLLECTIBLE] == 1)
-		&& (all_chars[PLAYER] == 1));
+	return ((charset[EXIT] == 1)
+		&& (charset[COLLECTIBLE] == 1)
+		&& (charset[PLAYER] == 1));
 }
 
-// Check whether the map has all available chars
-// and does not include invalid ones;
+// Check whether the map has all chars and doesn't include invalid ones
 static bool	has_valid_chars(t_map *map)
 {
-	unsigned char	all_chars[UCHAR_MAX];
-	size_t			index;
-	char			*s;
+	unsigned char	charset[UCHAR_MAX + 1];
+	size_t			row_idx;
+	size_t			column_idx;
 
-	ft_bzero(all_chars, sizeof (unsigned char) * (UCHAR_MAX + 1));
-	while (index < map->rows)
+	ft_bzero(charset, sizeof (unsigned char) * (UCHAR_MAX + 1));
+	row_idx = 0;
+	column_idx = 0;
+	while (row_idx < map->row)
 	{
-		while (*s)
-			all_chars[(size_t)(*(s++))] += 1;
+		while (column_idx < map->column)
+			charset[map->grid[row_idx][column_idx]] += 1;
 	}
-	return (has_valid_chars_helper(all_chars));
+	return (has_valid_chars_helper(charset));
 }
 
-// Check whether the grid is rectangle
-// If it is, update map->rows and map->columns
+// Check whether the grid is rectangle and update row and column member in map
+// column - 1 for newline, row - 1 for null termination
 static bool	has_valid_rows_and_columns(t_map *map)
 {
-	t_list	*node;
-	size_t	columns;
-	size_t	rows;
+	char	**grid;
+	size_t	row;
+	size_t	column;
 
-	node = map->grid;
-	columns = ft_strlen_s((char *)node->content);
-	rows = 0;
-	while (node)
-	{
-		if (columns != ft_strlen_s((char *)node->content))
+	grid = map->grid;
+	row = 0;
+	column = ft_strlen_s(grid[row]);
+	while (grid[++row])
+		if (column != ft_strlen_s(grid[row]))
 			return (false);
-		rows++;
-		node = node->next;
-	}
-	map->columns = columns;
-	map->rows = rows;
+	map->column = column - 1;
+	map->row = row - 1;
 	return (true);
 }
 
@@ -75,5 +96,5 @@ bool	is_valid_map(t_map *map)
 	return (has_valid_rows_and_columns(map)
 		&& has_valid_chars(map)
 		&& is_surrounded_by_walls(map)
-		&& is_playable(map));
+		&& is_playable(map->grid));
 }

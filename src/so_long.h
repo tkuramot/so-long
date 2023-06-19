@@ -6,7 +6,7 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 12:00:30 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/06/18 19:56:16 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/06/19 14:01:56 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,8 @@ typedef struct s_data
 typedef struct s_map
 {
 	char	**grid;
-	size_t	rows;
-	size_t	columns;
+	size_t	row;
+	size_t	column;
 }				t_map;
 
 typedef struct s_point
