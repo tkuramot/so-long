@@ -22,7 +22,7 @@ bool	is_surrounded_by_walls(t_map *map)
 	while (column_idx < map->column)
 	{
 		if (map->grid[0][column_idx] != WALL
-			|| map->grid[map->row][column_idx] != WALL)
+			|| map->grid[map->row - 1][column_idx] != WALL)
 			return (false);
 		column_idx++;
 	}
@@ -63,11 +63,16 @@ static bool	has_valid_chars(t_map *map)
 
 	ft_bzero(charset, sizeof (unsigned char) * (UCHAR_MAX + 1));
 	row_idx = 0;
-	column_idx = 0;
 	while (row_idx < map->row)
 	{
+		ft_printf("%s", map->grid[row_idx]);
+		column_idx = 0;
 		while (column_idx < map->column)
-			charset[map->grid[row_idx][column_idx]] += 1;
+		{
+			charset[(size_t)map->grid[row_idx][column_idx]]++;
+			column_idx++;
+		}
+		row_idx++;
 	}
 	return (has_valid_chars_helper(charset));
 }
@@ -87,7 +92,7 @@ static bool	has_valid_rows_and_columns(t_map *map)
 		if (column != ft_strlen_s(grid[row]))
 			return (false);
 	map->column = column - 1;
-	map->row = row - 1;
+	map->row = row;
 	return (true);
 }
 
@@ -96,5 +101,5 @@ bool	is_valid_map(t_map *map)
 	return (has_valid_rows_and_columns(map)
 		&& has_valid_chars(map)
 		&& is_surrounded_by_walls(map)
-		&& is_playable(map->grid));
+		&& is_playable(map));
 }
