@@ -6,7 +6,7 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 17:27:24 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/06/20 19:49:52 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/06/20 21:24:29 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,4 +40,9 @@ void	free_2d_array(void **array, size_t n)
 	while (idx < n)
 		free(array[idx++]);
 	free(array);
+}
+
+bool	is_same_coord(t_coord c1, t_coord c2)
+{
+	return (c1.y == c2.y && c1.x == c2.x);
 }

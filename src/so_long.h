@@ -6,7 +6,7 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 12:00:30 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/06/20 19:49:10 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/06/20 21:25:11 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,11 @@ typedef enum	e_event
 
 typedef enum	e_keycode
 {
-	ESC = 65307
+	ESC = 65307,
+	UP = 119,
+	DOWN = 115,
+	LEFT = 97,
+	RIGHT = 100
 }				t_keycode;
 
 typedef struct s_vars
@@ -76,13 +80,6 @@ typedef struct s_map
 	size_t	column;
 }				t_map;
 
-typedef struct s_game
-{
-	t_vars	vars;
-	t_map	*map;
-	t_coord	player_coord;
-}				t_game;
-
 typedef struct s_textures
 {
 	void	*empty;
@@ -92,17 +89,26 @@ typedef struct s_textures
 	void	*player;
 }				t_textures;
 
+typedef struct s_game
+{
+	t_vars		vars;
+	t_map		*map;
+	t_textures	textures;
+	t_coord		player_coord;
+}				t_game;
+
 t_map			*parse_map(char *map_file);
 void			initilizePlayerCoord(t_game *game);
 bool			is_valid_map(t_map *map);
 bool			is_surrounded_by_walls(t_map *map);
 bool			is_playable(t_map *map);
-t_textures		*load_textures(t_vars	*vars);
-void			draw_all(t_game *game, t_textures *textures);
+bool			load_textures(t_game *game);
+int				draw_all(t_game *game);
 int				event_handler(int keycode, t_game *game);
 int				my_close(t_vars *vars);
 void			**calloc_2d_array(size_t n_2d, size_t n_1d, size_t siz);
 void			free_2d_array(void **array, size_t n);
 t_coord			find_chr_in_map(t_map *map, char c);
+bool			is_same_coord(t_coord c1, t_coord c2);
 
 #endif

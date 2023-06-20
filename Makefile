@@ -44,7 +44,7 @@ INCLUDE = -I $(LIBFT_PATH)/include -I $(MLX_PATH)
 LIBRARY = -L $(MLX_PATH) -l $(MLX) -L $(LIBFT_PATH) -l $(LIBFT) \
 	-L/usr/X11R6/lib -lX11 -lXext
 SRCS = main.c map_parser.c map_validator.c map_validator_helper.c \
-	texture_loader.c put_image.c event.c utils.c
+	texture_loader.c draw.c event.c utils.c
 OBJS = $(SRCS:.c=.o)
 LIBFT = ft
 LIBFT_PATH = ./lib/libft

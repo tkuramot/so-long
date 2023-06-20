@@ -18,10 +18,16 @@ int	my_close(t_vars *vars)
 	exit(0);
 }
 
-static int	move_player(int keycode, t_map *map)
+static int	move_player(int keycode, t_game *game)
 {
-	(void)keycode;
-	(void)map;
+	if (keycode == UP)
+		game->player_coord.y--;
+	if (keycode == DOWN)
+		game->player_coord.y++;
+	if (keycode == LEFT)
+		game->player_coord.x--;
+	if (keycode == RIGHT)
+		game->player_coord.x++;
 	return (0);
 }
 
@@ -30,6 +36,6 @@ int	event_handler(int keycode, t_game *game)
 	if (keycode == ESC)
 		my_close(&game->vars);
 	else
-		move_player(keycode, game->map);
+		move_player(keycode, game);
 	return (0);
 }

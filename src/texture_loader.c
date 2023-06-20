@@ -6,7 +6,7 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 17:29:27 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/06/19 17:29:35 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/06/20 20:09:30 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,20 +23,16 @@ static t_textures	*load_texture(t_vars *vars, char *texture_path)
 	return (texture);
 }
 
-t_textures	*load_textures(t_vars	*vars)
+bool	load_textures(t_game *game)
 {
-	t_textures	*textures;
-
-	textures = (t_textures *)malloc(sizeof (t_textures));
-	if (!textures)
-		return (NULL);
-	textures->empty = load_texture(vars, EMPTY_PATH);
-	textures->wall = load_texture(vars, WALL_PATH);
-	textures->collectible = load_texture(vars, COLLECTIBLE_PATH);
-	textures->exit = load_texture(vars, EXIT_PATH);
-	textures->player = load_texture(vars, PLAYER_PATH);
-	if (!textures->empty || !textures->wall || !textures->collectible
-		|| !textures->exit || !textures->player)
-		return (NULL);
-	return (textures);
+	game->textures.empty = load_texture(&game->vars, EMPTY_PATH);
+	game->textures.wall = load_texture(&game->vars, WALL_PATH);
+	game->textures.collectible = load_texture(&game->vars, COLLECTIBLE_PATH);
+	game->textures.exit = load_texture(&game->vars, EXIT_PATH);
+	game->textures.player = load_texture(&game->vars, PLAYER_PATH);
+	if (!game->textures.empty || !game->textures.wall
+		|| !game->textures.collectible || !game->textures.exit
+		|| !game->textures.player)
+		return (false);
+	return (true);
 }

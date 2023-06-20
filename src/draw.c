@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   put_image.c                                        :+:      :+:    :+:   */
+/*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 14:34:42 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/06/20 19:47:15 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/06/20 21:27:29by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,23 @@ static void	put_texture_to_window(t_vars *vars, void *img, t_coord coord)
 		coord.x * BLOCK_SIZE, coord.y * BLOCK_SIZE);
 }
 
-static void	put_entity_to_window(t_game *game, t_textures *textures)
+static void	put_entity_to_window(t_game *game)
 {
-	put_texture_to_window(&game->vars, textures->player, game->player_coord);
-	put_texture_to_window(&game->vars, textures->exit,
+	put_texture_to_window(&game->vars, game->textures.player, game->player_coord);
+	put_texture_to_window(&game->vars, game->textures.exit,
 		find_chr_in_map(game->map, EXIT));
-	put_texture_to_window(&game->vars, textures->collectible,
+	put_texture_to_window(&game->vars, game->textures.collectible,
 		find_chr_in_map(game->map, COLLECTIBLE));
 }
 
-static void	put_map_to_window(t_game *game, t_textures *textures)
+static bool	is_empty_or_wall(t_game *game, t_coord coord)
+{
+	return (is_same_coord(coord, game->player_coord)
+		|| is_same_coord(coord, find_chr_in_map(game->map, COLLECTIBLE))
+		|| is_same_coord(coord, find_chr_in_map(game->map, EXIT)));
+}
+
+static void	put_map_to_window(t_game *game)
 {
 	size_t	row_idx;
 	size_t	column_idx;
@@ -38,11 +45,16 @@ static void	put_map_to_window(t_game *game, t_textures *textures)
 		column_idx = 0;
 		while (column_idx < game->map->column)
 		{
+			if (is_empty_or_wall(game, (t_coord){row_idx, column_idx}))
+			{
+				column_idx++;
+				continue;
+			}
 			if (game->map->grid[row_idx][column_idx] == WALL)
-				put_texture_to_window(&game->vars, textures->wall,
+				put_texture_to_window(&game->vars, game->textures.wall,
 					(t_coord){row_idx, column_idx});
 			else
-				put_texture_to_window(&game->vars, textures->empty,
+				put_texture_to_window(&game->vars, game->textures.empty,
 					(t_coord){row_idx, column_idx});
 			column_idx++;
 		}
@@ -50,8 +62,9 @@ static void	put_map_to_window(t_game *game, t_textures *textures)
 	}
 }
 
-void	draw_all(t_game *game, t_textures *textures)
+int	draw_all(t_game *game)
 {
-	put_map_to_window(game, textures);
-	put_entity_to_window(game, textures);
+	put_map_to_window(game);
+	put_entity_to_window(game);
+	return (0);
 }
