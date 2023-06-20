@@ -6,31 +6,11 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 17:27:24 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/06/20 16:30:44 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/06/20 19:49:52 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
-t_coord	find_chr_in_map(t_map *map, char c)
-{
-	size_t	row_idx;
-	size_t	column_idx;
-
-	row_idx = 0;
-	while (row_idx < map->row)
-	{
-		column_idx = 0;
-		while (column_idx < map->column)
-		{
-			if (map->grid[row_idx][column_idx] == c)
-				return ((t_coord){row_idx, column_idx});
-			column_idx++;
-		}
-		row_idx++;
-	}
-	return ((t_coord){0, 0});
-}
 
 void	**calloc_2d_array(size_t n_2d, size_t n_1d, size_t siz)
 {

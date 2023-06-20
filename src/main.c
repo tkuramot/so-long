@@ -6,7 +6,7 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 15:18:43 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/06/20 17:57:29 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/06/20 19:51:02 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,23 @@
 
 int	main(void)
 {
-	t_vars	vars;
+	t_game	game;
 	t_textures	*textures;
-	t_map	*map;
 
-	map = parse_map("./maps/map.ber");
-	if (!map)
+	game.map = parse_map("./maps/map.ber");
+	if (!game.map)
 	{
 		ft_printf("Error\n");
 		return (0);
 	}
-	vars.mlx = mlx_init();
-	vars.win = mlx_new_window(vars.mlx, map->column * BLOCK_SIZE, map->row * BLOCK_SIZE, "./so_long");
-	textures = load_textures(&vars);
-	draw_all(&vars, textures, map);
-	mlx_loop(vars.mlx);
+	initilizePlayerCoord(&game);
+	game.vars.mlx = mlx_init();
+	game.vars.win = mlx_new_window(game.vars.mlx,
+		game.map->column * BLOCK_SIZE, game.map->row * BLOCK_SIZE, "./so_long");
+	textures = load_textures(&game.vars);
+	draw_all(&game, textures);
+	mlx_hook(game.vars.win, ON_KEYDOWN, 1L << 0, event_handler, &game);
+	mlx_hook(game.vars.win, ON_DESTROY, 1L << 17, my_close, &game.vars);
+	mlx_loop(game.vars.mlx);
 	return (0);
 }

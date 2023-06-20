@@ -12,22 +12,24 @@
 
 #include "so_long.h"
 
-int	my_close(int keycode, t_vars *vars)
+int	my_close(t_vars *vars)
 {
-	if (keycode == 53)
-	{
-		mlx_destroy_window(vars->mlx, vars->win);
-		exit(0);
-	}
+	mlx_destroy_window(vars->mlx, vars->win);
+	exit(0);
+}
+
+static int	move_player(int keycode, t_map *map)
+{
+	(void)keycode;
+	(void)map;
 	return (0);
 }
 
-int	main(void)
+int	event_handler(int keycode, t_game *game)
 {
-	t_vars	vars;
-
-	vars.mlx = mlx_init();
-	vars.win = mlx_new_window(vars.mlx, 1920, 1080, "Hello world!");
-	mlx_hook(vars.win, 2, 1L << 2, my_close, &vars);
-	mlx_loop(vars.mlx);
+	if (keycode == ESC)
+		my_close(&game->vars);
+	else
+		move_player(keycode, game->map);
+	return (0);
 }

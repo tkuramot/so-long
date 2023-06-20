@@ -6,7 +6,7 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 12:24:05 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/06/19 18:08:46 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/06/20 19:50:20 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,35 @@ static char	**read_file(int fd, size_t row_idx)
 	}
 	grid[row_idx] = row;
 	return (grid);
+}
+
+void	initilizePlayerCoord(t_game *game)
+{
+	t_coord	player_coord;
+
+	player_coord = find_chr_in_map(game->map, PLAYER);
+	game->player_coord.x = player_coord.x;
+	game->player_coord.y = player_coord.y;
+}
+
+t_coord	find_chr_in_map(t_map *map, char c)
+{
+	size_t	row_idx;
+	size_t	column_idx;
+
+	row_idx = 0;
+	while (row_idx < map->row)
+	{
+		column_idx = 0;
+		while (column_idx < map->column)
+		{
+			if (map->grid[row_idx][column_idx] == c)
+				return ((t_coord){row_idx, column_idx});
+			column_idx++;
+		}
+		row_idx++;
+	}
+	return ((t_coord){0, 0});
 }
 
 t_map	*parse_map(char *map_file)
