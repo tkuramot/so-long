@@ -6,7 +6,7 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 12:00:30 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/06/20 14:31:23 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/06/20 14:39:20 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,8 @@ typedef struct s_map
 
 typedef struct s_point
 {
-	long long	x;
 	long long	y;
+	long long	x;
 }			t_point;
 
 typedef struct s_textures
@@ -75,7 +75,6 @@ bool			is_surrounded_by_walls(t_map *map);
 bool			is_playable(t_map *map);
 t_textures		*load_textures(t_vars	*vars);
 void			put_map_to_window(t_vars *vars, t_textures *textures, t_map *map);
-t_point			get_point(int x, int y);
 void			**calloc_2d_array(size_t n_2d, size_t n_1d, size_t siz);
 void			free_2d_array(void **array, size_t n);
 t_point			find_chr_in_map(t_map *map, char c);

@@ -6,20 +6,11 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 17:27:24 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/06/20 01:21:06 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/06/20 14:39:16 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
-t_point	get_point(int x, int y)
-{
-	t_point	point;
-
-	point.x = x;
-	point.y = y;
-	return (point);
-}
 
 t_point	find_chr_in_map(t_map *map, char c)
 {
@@ -33,12 +24,12 @@ t_point	find_chr_in_map(t_map *map, char c)
 		while (column_idx < map->column)
 		{
 			if (map->grid[row_idx][column_idx] == c)
-				return (get_point(column_idx, row_idx));
+				return ((t_point){row_idx, column_idx});
 			column_idx++;
 		}
 		row_idx++;
 	}
-	return (get_point(0, 0));
+	return ((t_point){0, 0});
 }
 
 void	**calloc_2d_array(size_t n_2d, size_t n_1d, size_t siz)

@@ -6,7 +6,7 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 13:51:27 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/06/20 14:35:02 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/06/20 14:37:46 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static void	dfs(t_map *map, bool **seen, t_point v)
 			d++;
 			continue ;
 		}
-		dfs(map, seen, get_point(nv.x, nv.y));
+		dfs(map, seen, (t_point){nv.y, nv.x});
 		d++;
 	}
 }
