@@ -6,7 +6,7 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 12:00:30 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/06/20 01:02:47 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/06/20 14:31:23 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,8 @@ typedef struct s_map
 
 typedef struct s_point
 {
-	int		x;
-	int		y;
+	long long	x;
+	long long	y;
 }			t_point;
 
 typedef struct s_textures

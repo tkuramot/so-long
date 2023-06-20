@@ -6,7 +6,7 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 13:51:27 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/06/20 01:30:36 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/06/20 14:35:02 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,25 @@
 
 static void	dfs(t_map *map, bool **seen, t_point v)
 {
-	size_t	d;
-	size_t	nx;
-	size_t	ny;
+	size_t		d;
+	t_point		nv;
+	const int	dy[4] = {-1, 0, 1, 0};
+	const int	dx[4] = {0, 1, 0, -1};
 
-	const int dy[4] = {-1, 0, 1, 0};
-	const int dx[4] = {0, 1, 0, -1};
 	seen[v.y][v.x] = true;
-	ft_printf("%d, %d\n", v.x, v.y);
 	d = 0;
 	while (d < 4)
 	{
-		nx = v.x + dx[d];
-		ny = v.y + dy[d];
-		if (0 < nx || nx >= map->column || 0 < ny || ny >= map->row
-			|| map->grid[ny][nx] == WALL || seen[ny][nx])
+		nv.x = v.x + dx[d];
+		nv.y = v.y + dy[d];
+		if (nv.x < 0 || nv.x >= (long long)map->column
+			|| nv.y < 0 || nv.y >= (long long)map->row
+			|| map->grid[nv.y][nv.x] == WALL || seen[nv.y][nv.x])
 		{
 			d++;
-			continue;
+			continue ;
 		}
-		dfs(map, seen, get_point(nx, ny));
+		dfs(map, seen, get_point(nv.x, nv.y));
 		d++;
 	}
 }
@@ -58,8 +57,6 @@ static bool	is_reachable(char start, char end, t_map *map)
 // the collectible is collectible
 bool	is_playable(t_map *map)
 {
-	ft_printf("==============%d\n", is_reachable(PLAYER, EXIT, map));
-	ft_printf("==============%d\n", is_reachable(PLAYER, COLLECTIBLE, map));
 	return (is_reachable(PLAYER, EXIT, map)
 		&& is_reachable(PLAYER, COLLECTIBLE, map));
 }
