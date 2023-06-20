@@ -1,4 +1,3 @@
-INC=/usr/X11/include
 ##
 ## Makefile for MiniLibX in /home/boulon/work/c/raytraceur/minilibx
 ## 
@@ -12,6 +11,7 @@ INC=/usr/X11/include
 ## Please use configure script
 
 
+INC	=%%%%
 
 UNAME = $(shell uname)
 CC	= gcc

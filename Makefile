@@ -48,7 +48,7 @@ SRCS = main.c map_parser.c map_validator.c map_validator_helper.c \
 OBJS = $(SRCS:.c=.o)
 LIBFT = ft
 LIBFT_PATH = ./lib/libft
-MLX_PATH = ./minilibx-linux
+MLX_PATH = ./lib/minilibx-linux
 MLX = mlx_Darwin
 
 all: $(NAME)
