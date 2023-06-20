@@ -6,7 +6,7 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 12:00:30 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/06/19 18:26:45 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/06/20 01:02:47 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,5 +78,6 @@ void			put_map_to_window(t_vars *vars, t_textures *textures, t_map *map);
 t_point			get_point(int x, int y);
 void			**calloc_2d_array(size_t n_2d, size_t n_1d, size_t siz);
 void			free_2d_array(void **array, size_t n);
+t_point			find_chr_in_map(t_map *map, char c);
 
 #endif

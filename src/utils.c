@@ -6,7 +6,7 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 17:27:24 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/06/20 00:28:07 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/06/20 01:21:06 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,11 @@ t_point	find_chr_in_map(t_map *map, char c)
 		{
 			if (map->grid[row_idx][column_idx] == c)
 				return (get_point(column_idx, row_idx));
+			column_idx++;
 		}
+		row_idx++;
 	}
+	return (get_point(0, 0));
 }
 
 void	**calloc_2d_array(size_t n_2d, size_t n_1d, size_t siz)
@@ -44,6 +47,7 @@ void	**calloc_2d_array(size_t n_2d, size_t n_1d, size_t siz)
 	size_t	row_idx;
 
 	array = (void **)ft_calloc(n_2d, sizeof (void *));
+	row_idx = 0;
 	while (row_idx < n_2d)
 	{
 		array[row_idx] = (void *)ft_calloc(n_1d, siz);
@@ -52,6 +56,7 @@ void	**calloc_2d_array(size_t n_2d, size_t n_1d, size_t siz)
 			free_2d_array(array, row_idx);
 			return (NULL);
 		}
+		row_idx++;
 	}
 	return (array);
 }
