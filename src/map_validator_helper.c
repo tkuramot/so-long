@@ -6,16 +6,16 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 13:51:27 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/06/20 14:37:46 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/06/20 16:30:44 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-static void	dfs(t_map *map, bool **seen, t_point v)
+static void	dfs(t_map *map, bool **seen, t_coord v)
 {
 	size_t		d;
-	t_point		nv;
+	t_coord		nv;
 	const int	dy[4] = {-1, 0, 1, 0};
 	const int	dx[4] = {0, 1, 0, -1};
 
@@ -32,7 +32,7 @@ static void	dfs(t_map *map, bool **seen, t_point v)
 			d++;
 			continue ;
 		}
-		dfs(map, seen, (t_point){nv.y, nv.x});
+		dfs(map, seen, (t_coord){nv.y, nv.x});
 		d++;
 	}
 }
@@ -41,7 +41,7 @@ static bool	is_reachable(char start, char end, t_map *map)
 {
 	bool	**seen;
 	bool	result;
-	t_point	end_point;
+	t_coord	end_point;
 
 	seen = (bool **)calloc_2d_array(map->row, map->column, sizeof (bool));
 	if (!seen)

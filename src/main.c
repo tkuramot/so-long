@@ -6,7 +6,7 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 15:18:43 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/06/19 17:32:25 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/06/20 17:57:29 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	main(void)
 	vars.mlx = mlx_init();
 	vars.win = mlx_new_window(vars.mlx, map->column * BLOCK_SIZE, map->row * BLOCK_SIZE, "./so_long");
 	textures = load_textures(&vars);
-	put_map_to_window(&vars, textures, map);
+	draw_all(&vars, textures, map);
 	mlx_loop(vars.mlx);
 	return (0);
 }

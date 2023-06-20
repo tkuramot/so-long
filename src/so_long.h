@@ -6,7 +6,7 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 12:00:30 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/06/20 14:39:20 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/06/20 18:30:52 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # define EMPTY_PATH "./textures/tiles/empty.xpm"
 # define WALL_PATH "./textures/tiles/wall.xpm"
 # define COLLECTIBLE_PATH "./textures/tiles/collectible.xpm"
-# define EXIT_PATH "./textures/tiles/wall.xpm"
+# define EXIT_PATH "./textures/tiles/exit.xpm"
 # define PLAYER_PATH "./textures/sprites/player.xpm"
 
 typedef enum e_char {
@@ -58,7 +58,7 @@ typedef struct s_point
 {
 	long long	y;
 	long long	x;
-}			t_point;
+}			t_coord;
 
 typedef struct s_textures
 {
@@ -74,9 +74,9 @@ bool			is_valid_map(t_map *map);
 bool			is_surrounded_by_walls(t_map *map);
 bool			is_playable(t_map *map);
 t_textures		*load_textures(t_vars	*vars);
-void			put_map_to_window(t_vars *vars, t_textures *textures, t_map *map);
+void			draw_all(t_vars *vars, t_textures *textures, t_map *map);
 void			**calloc_2d_array(size_t n_2d, size_t n_1d, size_t siz);
 void			free_2d_array(void **array, size_t n);
-t_point			find_chr_in_map(t_map *map, char c);
+t_coord			find_chr_in_map(t_map *map, char c);
 
 #endif
