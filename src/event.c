@@ -18,16 +18,34 @@ int	my_close(t_vars *vars)
 	exit(0);
 }
 
+static void	resolve_action(t_game *game, t_coord player)
+{
+	if (game->map->grid[player.y][player.x] == EMPTY
+		|| game->map->grid[player.y][player.x] == COLLECTIBLE)
+	{
+		game->player.y = player.y;
+		game->player.x = player.x;
+	}
+	if (game->map->grid[player.y][player.x] == COLLECTIBLE)
+		game->map->grid[player.y][player.x] = EMPTY;
+	if (game->map->grid[player.y][player.x] == EXIT)
+		my_close(&game->vars);
+}
+
 static int	move_player(int keycode, t_game *game)
 {
+	ft_printf("============================\n");
+	for(size_t i = 0; i < game->map->row; i++){
+		ft_printf("%s", game->map->grid[i]);
+	}
 	if (keycode == UP)
-		game->player_coord.y--;
+		resolve_action(game, (t_coord){game->player.y - 1, game->player.x});
 	if (keycode == DOWN)
-		game->player_coord.y++;
+		resolve_action(game, (t_coord){game->player.y + 1, game->player.x});
 	if (keycode == LEFT)
-		game->player_coord.x--;
+		resolve_action(game, (t_coord){game->player.y, game->player.x - 1});
 	if (keycode == RIGHT)
-		game->player_coord.x++;
+		resolve_action(game, (t_coord){game->player.y, game->player.x + 1});
 	return (0);
 }
 

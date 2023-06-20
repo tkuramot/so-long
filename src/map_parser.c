@@ -6,7 +6,7 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 12:24:05 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/06/20 19:50:20 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/06/20 23:50:44 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,12 @@ static char	**read_file(int fd, size_t row_idx)
 
 void	initilizePlayerCoord(t_game *game)
 {
-	t_coord	player_coord;
+	t_coord	player;
 
-	player_coord = find_chr_in_map(game->map, PLAYER);
-	game->player_coord.x = player_coord.x;
-	game->player_coord.y = player_coord.y;
+	player = find_chr_in_map(game->map, PLAYER);
+	game->map->grid[player.y][player.x] = EMPTY;
+	game->player.x = player.x;
+	game->player.y = player.y;
 }
 
 t_coord	find_chr_in_map(t_map *map, char c)
@@ -57,7 +58,7 @@ t_coord	find_chr_in_map(t_map *map, char c)
 		}
 		row_idx++;
 	}
-	return ((t_coord){0, 0});
+	return ((t_coord){-1, -1});
 }
 
 t_map	*parse_map(char *map_file)

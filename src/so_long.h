@@ -6,7 +6,7 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 12:00:30 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/06/20 21:25:11 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/06/20 23:50:23 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,15 +58,6 @@ typedef struct s_vars
 	void	*win;
 }			t_vars;
 
-typedef struct s_data
-{
-	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-}			t_data;
-
 typedef struct s_coord
 {
 	long long	y;
@@ -94,7 +85,7 @@ typedef struct s_game
 	t_vars		vars;
 	t_map		*map;
 	t_textures	textures;
-	t_coord		player_coord;
+	t_coord		player;
 }				t_game;
 
 t_map			*parse_map(char *map_file);

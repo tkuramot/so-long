@@ -14,13 +14,15 @@
 
 static void	put_texture_to_window(t_vars *vars, void *img, t_coord coord)
 {
+	if (coord.y < 0 || coord.x < 0)
+		return ;
 	mlx_put_image_to_window(vars->mlx, vars->win, img,
 		coord.x * BLOCK_SIZE, coord.y * BLOCK_SIZE);
 }
 
 static void	put_entity_to_window(t_game *game)
 {
-	put_texture_to_window(&game->vars, game->textures.player, game->player_coord);
+	put_texture_to_window(&game->vars, game->textures.player, game->player);
 	put_texture_to_window(&game->vars, game->textures.exit,
 		find_chr_in_map(game->map, EXIT));
 	put_texture_to_window(&game->vars, game->textures.collectible,
@@ -29,7 +31,7 @@ static void	put_entity_to_window(t_game *game)
 
 static bool	is_empty_or_wall(t_game *game, t_coord coord)
 {
-	return (is_same_coord(coord, game->player_coord)
+	return (is_same_coord(coord, game->player)
 		|| is_same_coord(coord, find_chr_in_map(game->map, COLLECTIBLE))
 		|| is_same_coord(coord, find_chr_in_map(game->map, EXIT)));
 }

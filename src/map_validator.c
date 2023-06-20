@@ -50,7 +50,7 @@ static bool	has_valid_chars_helper(unsigned char *charset)
 		c++;
 	}
 	return ((charset[EXIT] == 1)
-		&& (charset[COLLECTIBLE] == 1)
+		&& (charset[COLLECTIBLE] >= 1)
 		&& (charset[PLAYER] == 1));
 }
 
