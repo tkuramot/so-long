@@ -6,7 +6,7 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 12:00:30 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/06/20 23:50:23 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/06/21 00:48:22 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "libft.h"
 # include <mlx.h>
+# include <stdio.h>
 # include <fcntl.h>
 
 # define BLOCK_SIZE 32
@@ -101,5 +102,6 @@ void			**calloc_2d_array(size_t n_2d, size_t n_1d, size_t siz);
 void			free_2d_array(void **array, size_t n);
 t_coord			find_chr_in_map(t_map *map, char c);
 bool			is_same_coord(t_coord c1, t_coord c2);
+void			replace_newline_with_null(char *s);
 
 #endif

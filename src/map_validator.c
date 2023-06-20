@@ -77,7 +77,6 @@ static bool	has_valid_chars(t_map *map)
 }
 
 // Check whether the grid is rectangle and update row and column member in map
-// column - 1 for newline, row - 1 for null termination
 static bool	has_valid_rows_and_columns(t_map *map)
 {
 	char	**grid;
@@ -90,15 +89,33 @@ static bool	has_valid_rows_and_columns(t_map *map)
 	while (grid[++row])
 		if (column != ft_strlen_s(grid[row]))
 			return (false);
-	map->column = column - 1;
+	map->column = column;
 	map->row = row;
 	return (true);
 }
 
 bool	is_valid_map(t_map *map)
 {
-	return (has_valid_rows_and_columns(map)
-		&& has_valid_chars(map)
-		&& is_surrounded_by_walls(map)
-		&& is_playable(map));
+	if (!has_valid_rows_and_columns(map))
+	{
+		perror("Map must be rectangular.");
+		return (false);
+	}
+	ft_printf("%d %d\n", map->row, map->column);
+	if (!has_valid_chars(map))
+	{
+		perror("Map must contain valid characters.");
+		return (false);
+	}
+	if (!is_surrounded_by_walls(map))
+	{
+		perror("Map must be surrounded by walls.");
+		return (false);
+	}
+	if (!is_playable(map))
+	{
+		perror("Map must be playable.");
+		return (false);
+	}
+	return (true);
 }

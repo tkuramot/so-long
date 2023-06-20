@@ -34,10 +34,6 @@ static void	resolve_action(t_game *game, t_coord player)
 
 static int	move_player(int keycode, t_game *game)
 {
-	ft_printf("============================\n");
-	for(size_t i = 0; i < game->map->row; i++){
-		ft_printf("%s", game->map->grid[i]);
-	}
 	if (keycode == UP)
 		resolve_action(game, (t_coord){game->player.y - 1, game->player.x});
 	if (keycode == DOWN)

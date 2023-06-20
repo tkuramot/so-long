@@ -6,7 +6,7 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 12:24:05 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/06/20 23:50:44 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/06/21 00:51:34 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ static char	**read_file(int fd, size_t row_idx)
 		free(row);
 		return (NULL);
 	}
+	replace_newline_with_null(row);
 	grid[row_idx] = row;
 	return (grid);
 }
