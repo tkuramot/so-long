@@ -32,7 +32,11 @@ static void	resolve_action(t_game *game, t_coord player)
 	if (game->map->grid[player.y][player.x] == COLLECTIBLE)
 		game->map->grid[player.y][player.x] = EMPTY;
 	if (game->map->grid[player.y][player.x] == EXIT)
+	{
+		game->move++;
+		ft_printf("Move: %d\n", game->move);
 		my_close(game);
+	}
 }
 
 static int	move_player(int keycode, t_game *game)

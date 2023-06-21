@@ -53,13 +53,14 @@ MLX = mlx_Darwin
 
 all: $(NAME)
 
-$(NAME):$(addprefix src/, $(OBJS))
+$(NAME): $(addprefix src/, $(OBJS))
 	make -C $(LIBFT_PATH)
 	make -C $(MLX_PATH)
 	$(CC) $(CFLAGS) $(addprefix src/, $(OBJS)) $(LIBRARY) -framework OpenGL -framework AppKit -o $(NAME)
 
 .c.o: $(addprefix src/, $(OBJS))
-	$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
+	# $(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
+	/opt/homebrew/bin/gcc-13 -g -fsanitize=leak $(CFLAGS) $(INCLUDE) -c $< -o $@
 
 clean:
 	make -C $(LIBFT_PATH) clean
@@ -72,4 +73,9 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: bonus clean fclean re all
+debug: $(addprefix src/, $(OBJS))
+	make -C $(LIBFT_PATH)
+	make -C $(MLX_PATH)
+	/opt/homebrew/bin/gcc-13 -g -fsanitize=leak $(CFLAGS) $(addprefix src/, $(OBJS)) $(LIBRARY) -framework OpenGL -framework AppKit -o $(NAME)
+
+.PHONY: clean fclean re all
