@@ -6,7 +6,7 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 12:24:05 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/06/21 00:51:34 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/06/21 23:25:47 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ void	initilizePlayerCoord(t_game *game)
 {
 	t_coord	player;
 
-	player = find_chr_in_map(game->map, PLAYER);
-	game->map->grid[player.y][player.x] = EMPTY;
+	player = find_chr_in_map(&game->map, PLAYER);
+	game->map.grid[player.y][player.x] = EMPTY;
 	game->player.x = player.x;
 	game->player.y = player.y;
 }
@@ -62,21 +62,17 @@ t_coord	find_chr_in_map(t_map *map, char c)
 	return ((t_coord){-1, -1});
 }
 
-t_map	*parse_map(char *map_file)
+bool	parse_map(t_game *game, char *map_file)
 {
 	int		fd;
-	t_map	*map;
 
 	fd = open(map_file, O_RDONLY);
 	if (fd < 0)
 		return (NULL);
-	map = (t_map *)ft_calloc(1, sizeof (t_map));
-	if (!map)
-		return (NULL);
-	map->grid = read_file(fd, 0);
-	if (!map->grid)
-		return (NULL);
-	if (!is_valid_map(map))
-		return (NULL);
-	return (map);
+	game->map.grid = read_file(fd, 0);
+	if (!game->map.grid)
+		return (false);
+	if (!is_valid_map(&game->map))
+		return (false);
+	return (true);
 }

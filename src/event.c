@@ -14,24 +14,25 @@
 
 int	my_close(t_game *game)
 {
-	mlx_destroy_window(game->vars.mlx, game->vars.win);
 	exit_in_clean_way(game);
+	mlx_destroy_window(game->vars.mlx, game->vars.win);
+	mlx_destroy_display(game->vars.mlx);
 	exit(0);
 }
 
 static void	resolve_action(t_game *game, t_coord player)
 {
-	if (game->map->grid[player.y][player.x] == EMPTY
-		|| game->map->grid[player.y][player.x] == COLLECTIBLE)
+	if (game->map.grid[player.y][player.x] == EMPTY
+		|| game->map.grid[player.y][player.x] == COLLECTIBLE)
 	{
 		game->player.y = player.y;
 		game->player.x = player.x;
 		game->move++;
 		ft_printf("Move: %d\n", game->move);
 	}
-	if (game->map->grid[player.y][player.x] == COLLECTIBLE)
-		game->map->grid[player.y][player.x] = EMPTY;
-	if (game->map->grid[player.y][player.x] == EXIT)
+	if (game->map.grid[player.y][player.x] == COLLECTIBLE)
+		game->map.grid[player.y][player.x] = EMPTY;
+	if (game->map.grid[player.y][player.x] == EXIT)
 	{
 		game->move++;
 		ft_printf("Move: %d\n", game->move);

@@ -6,7 +6,7 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 12:00:30 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/06/21 19:17:22 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/06/21 23:24:21 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,24 @@
 # define EXIT_PATH "./textures/tiles/exit.xpm"
 # define PLAYER_PATH "./textures/sprites/player.xpm"
 
-typedef enum	e_char {
+typedef enum	e_char
+{
 	EMPTY = '0',
 	WALL = '1',
 	COLLECTIBLE = 'C',
 	EXIT = 'E',
 	PLAYER = 'P'
 }				t_char;
+
+typedef enum	e_texture_idx
+{
+	IDX_EMPTY,
+	IDX_WALL,
+	IDX_COLLECTIBLE,
+	IDX_EXIT,
+	IDX_PLAYER
+}				t_texture_idx;
+
 
 typedef enum	e_event
 {
@@ -74,23 +85,20 @@ typedef struct s_map
 
 typedef struct s_textures
 {
-	void	*empty;
-	void	*wall;
-	void	*collectible;
-	void	*exit;
-	void	*player;
+	size_t	counter;
+	void	*containers[5];
 }				t_textures;
 
 typedef struct s_game
 {
 	size_t		move;
 	t_vars		vars;
-	t_map		*map;
+	t_map		map;
 	t_textures	textures;
 	t_coord		player;
 }				t_game;
 
-t_map			*parse_map(char *map_file);
+bool			parse_map(t_game *game, char *map_file);
 void			initilizePlayerCoord(t_game *game);
 bool			is_valid_map(t_map *map);
 bool			is_surrounded_by_walls(t_map *map);
@@ -104,6 +112,7 @@ void			free_2d_array(void **array, size_t n);
 t_coord			find_chr_in_map(t_map *map, char c);
 bool			is_same_coord(t_coord c1, t_coord c2);
 void			replace_newline_with_null(char *s);
+void			destroy_textures(t_game * game);
 void			exit_in_clean_way(t_game *game);
 
 #endif

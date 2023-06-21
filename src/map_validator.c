@@ -98,22 +98,25 @@ bool	is_valid_map(t_map *map)
 {
 	if (!has_valid_rows_and_columns(map))
 	{
+		free_2d_array((void **)map->grid, map->row);
 		perror("Map must be rectangular.");
 		return (false);
 	}
-	ft_printf("%d %d\n", map->row, map->column);
 	if (!has_valid_chars(map))
 	{
+		free_2d_array((void **)map->grid, map->row);
 		perror("Map must contain valid characters.");
 		return (false);
 	}
 	if (!is_surrounded_by_walls(map))
 	{
+		free_2d_array((void **)map->grid, map->row);
 		perror("Map must be surrounded by walls.");
 		return (false);
 	}
 	if (!is_playable(map))
 	{
+		free_2d_array((void **)map->grid, map->row);
 		perror("Map must be playable.");
 		return (false);
 	}

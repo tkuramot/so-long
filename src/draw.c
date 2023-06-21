@@ -22,18 +22,18 @@ static void	put_texture_to_window(t_vars *vars, void *img, t_coord coord)
 
 static void	put_entity_to_window(t_game *game)
 {
-	put_texture_to_window(&game->vars, game->textures.player, game->player);
-	put_texture_to_window(&game->vars, game->textures.exit,
-		find_chr_in_map(game->map, EXIT));
-	put_texture_to_window(&game->vars, game->textures.collectible,
-		find_chr_in_map(game->map, COLLECTIBLE));
+	put_texture_to_window(&game->vars, game->textures.containers[IDX_PLAYER], game->player);
+	put_texture_to_window(&game->vars, game->textures.containers[IDX_EXIT],
+		find_chr_in_map(&game->map, EXIT));
+	put_texture_to_window(&game->vars, game->textures.containers[IDX_COLLECTIBLE],
+		find_chr_in_map(&game->map, COLLECTIBLE));
 }
 
 static bool	is_empty_or_wall(t_game *game, t_coord coord)
 {
 	return (is_same_coord(coord, game->player)
-		|| is_same_coord(coord, find_chr_in_map(game->map, COLLECTIBLE))
-		|| is_same_coord(coord, find_chr_in_map(game->map, EXIT)));
+		|| is_same_coord(coord, find_chr_in_map(&game->map, COLLECTIBLE))
+		|| is_same_coord(coord, find_chr_in_map(&game->map, EXIT)));
 }
 
 static void	put_map_to_window(t_game *game)
@@ -42,21 +42,21 @@ static void	put_map_to_window(t_game *game)
 	size_t	column_idx;
 
 	row_idx = 0;
-	while (row_idx < game->map->row)
+	while (row_idx < game->map.row)
 	{
 		column_idx = 0;
-		while (column_idx < game->map->column)
+		while (column_idx < game->map.column)
 		{
 			if (is_empty_or_wall(game, (t_coord){row_idx, column_idx}))
 			{
 				column_idx++;
 				continue;
 			}
-			if (game->map->grid[row_idx][column_idx] == WALL)
-				put_texture_to_window(&game->vars, game->textures.wall,
+			if (game->map.grid[row_idx][column_idx] == WALL)
+				put_texture_to_window(&game->vars, game->textures.containers[IDX_WALL],
 					(t_coord){row_idx, column_idx});
 			else
-				put_texture_to_window(&game->vars, game->textures.empty,
+				put_texture_to_window(&game->vars, game->textures.containers[IDX_EMPTY],
 					(t_coord){row_idx, column_idx});
 			column_idx++;
 		}

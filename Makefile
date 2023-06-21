@@ -73,9 +73,7 @@ fclean: clean
 
 re: fclean all
 
-debug: $(addprefix src/, $(OBJS))
-	make -C $(LIBFT_PATH)
-	make -C $(MLX_PATH)
-	/opt/homebrew/bin/gcc-13 -g -fsanitize=leak $(CFLAGS) $(addprefix src/, $(OBJS)) $(LIBRARY) -framework OpenGL -framework AppKit -o $(NAME)
+debug:
+	leaks -atExit -- ./so_long maps/small_map.ber > log
 
 .PHONY: clean fclean re all
