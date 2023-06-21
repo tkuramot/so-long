@@ -12,9 +12,10 @@
 
 #include "so_long.h"
 
-int	my_close(t_vars *vars)
+int	my_close(t_game *game)
 {
-	mlx_destroy_window(vars->mlx, vars->win);
+	mlx_destroy_window(game->vars.mlx, game->vars.win);
+	exit_in_clean_way(game);
 	exit(0);
 }
 
@@ -25,11 +26,13 @@ static void	resolve_action(t_game *game, t_coord player)
 	{
 		game->player.y = player.y;
 		game->player.x = player.x;
+		game->move++;
+		ft_printf("Move: %d\n", game->move);
 	}
 	if (game->map->grid[player.y][player.x] == COLLECTIBLE)
 		game->map->grid[player.y][player.x] = EMPTY;
 	if (game->map->grid[player.y][player.x] == EXIT)
-		my_close(&game->vars);
+		my_close(game);
 }
 
 static int	move_player(int keycode, t_game *game)
@@ -48,7 +51,7 @@ static int	move_player(int keycode, t_game *game)
 int	event_handler(int keycode, t_game *game)
 {
 	if (keycode == ESC)
-		my_close(&game->vars);
+		my_close(game);
 	else
 		move_player(keycode, game);
 	return (0);

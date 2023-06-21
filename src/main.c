@@ -6,7 +6,7 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 15:18:43 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/06/20 23:59:16 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/06/21 19:16:39 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int	main(int argc, char **argv)
 {
 	t_game	game;
 
+	ft_bzero(&game, sizeof (t_game));
 	game.map = parse_map(argv[argc - 1]);
 	if (!game.map)
 	{
@@ -32,8 +33,13 @@ int	main(int argc, char **argv)
 		return (0);
 	}
 	mlx_hook(game.vars.win, ON_KEYDOWN, 1L << 0, event_handler, &game);
-	mlx_hook(game.vars.win, ON_DESTROY, 1L << 17, my_close, &game.vars);
+	mlx_hook(game.vars.win, ON_DESTROY, 1L << 17, my_close, &game);
 	mlx_loop_hook(game.vars.mlx, draw_all, &game);
 	mlx_loop(game.vars.mlx);
 	return (0);
+}
+
+__attribute__((destructor))
+static void destructor() {
+    system("leaks -atExit -- ./so_long");
 }
