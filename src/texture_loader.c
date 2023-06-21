@@ -6,7 +6,7 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 17:29:27 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/06/21 23:37:49 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/06/22 00:05:38 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,7 @@ static t_textures	*load_texture(t_vars *vars, char *texture_path)
 	int		width;
 	int		height;
 
-	texture = malloc(sizeof (void *));
 	texture = mlx_xpm_file_to_image(vars->mlx, texture_path, &width, &height);
-		ft_printf("%p\n", texture);
 	return (texture);
 }
 
