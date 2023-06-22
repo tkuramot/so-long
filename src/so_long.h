@@ -6,7 +6,7 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 12:00:30 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/06/22 17:09:22 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/06/22 22:21:39 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@
 # define WALL_PATH "./textures/tiles/wall.xpm"
 # define COLLECTIBLE_PATH "./textures/tiles/collectible.xpm"
 # define EXIT_PATH "./textures/tiles/exit.xpm"
-# define PLAYER_PATH "./textures/sprites/player.xpm"
+# define PLAYER1_PATH "./textures/sprites/player1.xpm"
+# define PLAYER2_PATH "./textures/sprites/player2.xpm"
 
 typedef enum	e_char
 {
@@ -41,7 +42,8 @@ typedef enum	e_idx_texture
 	IDX_WALL,
 	IDX_COLLECTIBLE,
 	IDX_EXIT,
-	IDX_PLAYER
+	IDX_PLAYER1,
+	IDX_PLAYER2
 }				t_idx_texture;
 
 
@@ -87,7 +89,7 @@ typedef struct s_map
 typedef struct s_textures
 {
 	size_t	counter;
-	void	*containers[5];
+	void	*containers[6];
 }				t_textures;
 
 typedef struct s_game

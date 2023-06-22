@@ -6,7 +6,7 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 14:34:42 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/06/20 21:27:29by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/06/22 22:46:59 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void	put_texture_to_window(t_vars *vars, void *img, t_coord coord)
 
 static void	put_entity_to_window(t_game *game)
 {
-	put_texture_to_window(&game->vars, game->textures.containers[IDX_PLAYER], game->player);
+	put_texture_to_window(&game->vars, game->textures.containers[IDX_PLAYER1], game->player);
 	put_texture_to_window(&game->vars, game->textures.containers[IDX_EXIT],
 		find_chr_in_map(&game->map, EXIT));
 	put_texture_to_window(&game->vars, game->textures.containers[IDX_COLLECTIBLE],

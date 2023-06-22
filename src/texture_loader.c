@@ -6,7 +6,7 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 17:29:27 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/06/22 10:21:45 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/06/22 22:36:09 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,12 @@ bool	load_textures(t_game *game)
 	load_texture(game, IDX_EXIT, EXIT_PATH);
 	if (!game->textures.containers[IDX_EXIT])
 		return (false);
-	load_texture(game, IDX_PLAYER, PLAYER_PATH);
-	if (!game->textures.containers[IDX_PLAYER])
+	load_texture(game, IDX_PLAYER1, PLAYER1_PATH);
+	if (!game->textures.containers[IDX_PLAYER1])
+		return (false);
+	load_texture(game, IDX_PLAYER2, PLAYER2_PATH);
+	if (!game->textures.containers[IDX_PLAYER2])
 		return (false);
 	return (true);
 }
+
