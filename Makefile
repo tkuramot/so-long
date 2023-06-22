@@ -59,8 +59,8 @@ $(NAME): $(addprefix src/, $(OBJS))
 	$(CC) $(CFLAGS) $(addprefix src/, $(OBJS)) $(LIBRARY) -framework OpenGL -framework AppKit -o $(NAME)
 
 .c.o: $(addprefix src/, $(OBJS))
-	# $(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
-	/opt/homebrew/bin/gcc-13 -g -fsanitize=leak $(CFLAGS) $(INCLUDE) -c $< -o $@
+	$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
+	# /opt/homebrew/bin/gcc-13 -g -fsanitize=leak $(CFLAGS) $(INCLUDE) -c $< -o $@
 
 clean:
 	make -C $(LIBFT_PATH) clean
