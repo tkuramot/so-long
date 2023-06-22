@@ -6,7 +6,7 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 12:00:30 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/06/21 23:24:21 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/06/22 10:15:51 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,14 @@ typedef enum	e_char
 	PLAYER = 'P'
 }				t_char;
 
-typedef enum	e_texture_idx
+typedef enum	e_idx_texture
 {
 	IDX_EMPTY,
 	IDX_WALL,
 	IDX_COLLECTIBLE,
 	IDX_EXIT,
 	IDX_PLAYER
-}				t_texture_idx;
+}				t_idx_texture;
 
 
 typedef enum	e_event
@@ -113,6 +113,6 @@ t_coord			find_chr_in_map(t_map *map, char c);
 bool			is_same_coord(t_coord c1, t_coord c2);
 void			replace_newline_with_null(char *s);
 void			destroy_textures(t_game * game);
-void			exit_in_clean_way(t_game *game);
+void			free_all_memory(t_game *game);
 
 #endif

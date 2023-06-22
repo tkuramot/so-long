@@ -1,21 +1,16 @@
-0x14d804080
-0x14d8044d0
-0x14d805a60
-0x14d805b50
-0x14d805c50
 Move: 1
 Move: 2
-Process:         so_long [28925]
+Process:         so_long [34267]
 Path:            /Users/USER/*/so_long
-Load Address:    0x102d64000
+Load Address:    0x104ce8000
 Identifier:      so_long
 Version:         0
 Code Type:       ARM64
 Platform:        macOS
-Parent Process:  leaks [28924]
+Parent Process:  leaks [34266]
 
-Date/Time:       2023-06-22 00:03:41.651 +0900
-Launch Time:     2023-06-22 00:03:39.680 +0900
+Date/Time:       2023-06-22 10:21:54.311 +0900
+Launch Time:     2023-06-22 10:21:52.731 +0900
 OS Version:      macOS 13.4 (22F66)
 Report Version:  7
 Analysis Tool:   /usr/bin/leaks
@@ -26,6 +21,6 @@ Idle exit:                  untracked
 ----
 
 leaks Report Version: 4.0, multi-line stacks
-Process 28925: 1173 nodes malloced for 92 KB
-Process 28925: 0 leaks for 0 total leaked bytes.
+Process 34267: 1272 nodes malloced for 160 KB
+Process 34267: 0 leaks for 0 total leaked bytes.
 

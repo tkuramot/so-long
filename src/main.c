@@ -6,23 +6,20 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 15:18:43 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/06/21 23:38:07 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/06/22 10:08:25 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-// __attribute__((destructor)) static void destructor()
-// {
-// 	system("leaks -q so_long");
-// }
-
 int	main(int argc, char **argv)
 {
 	t_game	game;
 
+	if (argc != 2)
+		return (0);
 	ft_bzero(&game, sizeof (t_game));
-	if (!parse_map(&game, argv[argc - 1]))
+	if (!parse_map(&game, argv[1]))
 	{
 		ft_printf("Error\n");
 		return (0);

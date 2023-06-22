@@ -6,7 +6,7 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 13:51:27 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/06/20 16:30:44 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/06/22 10:10:35 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,14 @@ static bool	is_reachable(char start, char end, t_map *map)
 {
 	bool	**seen;
 	bool	result;
-	t_coord	end_point;
+	t_coord	end_coord;
 
 	seen = (bool **)calloc_2d_array(map->row, map->column, sizeof (bool));
 	if (!seen)
 		return (false);
 	dfs(map, seen, find_chr_in_map(map, start));
-	end_point = find_chr_in_map(map, end);
-	result = seen[end_point.y][end_point.x];
+	end_coord = find_chr_in_map(map, end);
+	result = seen[end_coord.y][end_coord.x];
 	free_2d_array((void **)seen, map->row);
 	return (result);
 }

@@ -17,7 +17,6 @@ bool	is_surrounded_by_walls(t_map *map)
 	size_t	row_idx;
 	size_t	column_idx;
 
-	row_idx = 0;
 	column_idx = 0;
 	while (column_idx < map->column)
 	{
@@ -26,6 +25,7 @@ bool	is_surrounded_by_walls(t_map *map)
 			return (false);
 		column_idx++;
 	}
+	row_idx = 0;
 	while (row_idx < map->row)
 	{
 		if ((map->grid[row_idx][0] != WALL)
@@ -38,7 +38,7 @@ bool	is_surrounded_by_walls(t_map *map)
 
 // Check whether only valid chars are included and
 // EXIT, COLLECTIBLE and PLAYER is solely included
-static bool	has_valid_chars_helper(unsigned char *charset)
+static bool	is_valid_charset(unsigned char *charset)
 {
 	size_t	c;
 
@@ -73,7 +73,7 @@ static bool	has_valid_chars(t_map *map)
 		}
 		row_idx++;
 	}
-	return (has_valid_chars_helper(charset));
+	return (is_valid_charset(charset));
 }
 
 // Check whether the grid is rectangle and update row and column member in map
@@ -89,8 +89,8 @@ static bool	has_valid_rows_and_columns(t_map *map)
 	while (grid[++row])
 		if (column != ft_strlen_s(grid[row]))
 			return (false);
-	map->column = column;
 	map->row = row;
+	map->column = column;
 	return (true);
 }
 

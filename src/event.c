@@ -14,7 +14,7 @@
 
 int	my_close(t_game *game)
 {
-	exit_in_clean_way(game);
+	free_all_memory(game);
 	mlx_destroy_window(game->vars.mlx, game->vars.win);
 	mlx_destroy_display(game->vars.mlx);
 	exit(0);
@@ -30,14 +30,14 @@ static void	resolve_action(t_game *game, t_coord player)
 		game->move++;
 		ft_printf("Move: %d\n", game->move);
 	}
-	if (game->map.grid[player.y][player.x] == COLLECTIBLE)
-		game->map.grid[player.y][player.x] = EMPTY;
 	if (game->map.grid[player.y][player.x] == EXIT)
 	{
 		game->move++;
 		ft_printf("Move: %d\n", game->move);
 		my_close(game);
 	}
+	if (game->map.grid[player.y][player.x] == COLLECTIBLE)
+		game->map.grid[player.y][player.x] = EMPTY;
 }
 
 static int	move_player(int keycode, t_game *game)
