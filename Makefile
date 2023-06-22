@@ -74,6 +74,6 @@ fclean: clean
 re: fclean all
 
 debug:
-	leaks -atExit -- ./so_long maps/small_map.ber > log
+	leaks -atExit -- ./so_long maps/default_map.ber > log
 
 .PHONY: clean fclean re all

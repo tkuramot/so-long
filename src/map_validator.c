@@ -99,25 +99,25 @@ bool	is_valid_map(t_map *map)
 	if (!has_valid_rows_and_columns(map))
 	{
 		free_2d_array((void **)map->grid, map->row);
-		perror("Map must be rectangular.");
+		print_error("The map must be rectangular");
 		return (false);
 	}
 	if (!has_valid_chars(map))
 	{
 		free_2d_array((void **)map->grid, map->row);
-		perror("Map must contain valid characters.");
+		print_error("The map must contain valid characters");
 		return (false);
 	}
 	if (!is_surrounded_by_walls(map))
 	{
 		free_2d_array((void **)map->grid, map->row);
-		perror("Map must be surrounded by walls.");
+		print_error("The map must be surrounded by walls");
 		return (false);
 	}
 	if (!is_playable(map))
 	{
 		free_2d_array((void **)map->grid, map->row);
-		perror("Map must be playable.");
+		print_error("The map must be playable");
 		return (false);
 	}
 	return (true);

@@ -6,7 +6,7 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 15:18:43 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/06/22 10:08:25 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/06/22 17:12:13 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,17 +20,14 @@ int	main(int argc, char **argv)
 		return (0);
 	ft_bzero(&game, sizeof (t_game));
 	if (!parse_map(&game, argv[1]))
-	{
-		ft_printf("Error\n");
 		return (0);
-	}
 	initilizePlayerCoord(&game);
 	game.vars.mlx = mlx_init();
 	game.vars.win = mlx_new_window(game.vars.mlx,
 		game.map.column * BLOCK_SIZE, game.map.row * BLOCK_SIZE, "./so_long");
 	if (!load_textures(&game))
 	{
-		ft_printf("Failed to load textures\n");
+		ft_printf("Failed in loading textures\n");
 		destroy_textures(&game);
 		return (0);
 	}

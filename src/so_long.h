@@ -6,7 +6,7 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 12:00:30 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/06/22 10:15:51 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/06/22 17:09:22 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,10 @@
 # define SO_LONG_H
 
 # include "libft.h"
-# include <mlx.h>
-# include <stdio.h>
+# include <sys/errno.h>
 # include <fcntl.h>
+# include <mlx.h>
+# include <string.h>
 
 # define BLOCK_SIZE 32
 # define EMPTY_PATH "./textures/tiles/empty.xpm"
@@ -114,5 +115,6 @@ bool			is_same_coord(t_coord c1, t_coord c2);
 void			replace_newline_with_null(char *s);
 void			destroy_textures(t_game * game);
 void			free_all_memory(t_game *game);
+void			print_error(char *s);
 
 #endif

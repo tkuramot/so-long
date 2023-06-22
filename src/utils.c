@@ -6,7 +6,7 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 17:27:24 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/06/21 23:25:37 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/06/22 17:09:13 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,4 +56,12 @@ void	replace_newline_with_null(char *s)
 		return ;
 	if (s[end - 1] == '\n')
 		s[end - 1] = '\0';
+}
+
+void	print_error(char *s)
+{
+	if (!s)
+		ft_printf("Error\n%s\n", strerror(errno));
+	else
+		ft_printf("Error\n%s\n", s);
 }

@@ -6,7 +6,7 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 12:24:05 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/06/21 23:25:47 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/06/22 17:12:30 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,10 @@ bool	parse_map(t_game *game, char *map_file)
 
 	fd = open(map_file, O_RDONLY);
 	if (fd < 0)
+	{
+		print_error(NULL);
 		return (NULL);
+	}
 	game->map.grid = read_file(fd, 0);
 	if (!game->map.grid)
 		return (false);
