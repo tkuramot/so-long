@@ -6,7 +6,7 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 12:00:30 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/06/23 23:06:38 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/06/24 02:22:31 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,9 +117,11 @@ bool			is_valid_map(t_map *map);
 bool			is_surrounded_by_walls(t_map *map);
 bool			is_playable(t_map *map);
 bool			load_textures(t_game *game);
-int				draw_all(t_game *game);
+int				update_per_frame(t_game *game);
 void			put_sprite_with_animation(t_game *game);
 void			put_texture_to_window(t_vars *vars, void *img, t_coord coord);
+void			put_object(t_game *game);
+void			put_map(t_game *game);
 int				event_handler(int keycode, t_game *game);
 int				my_close(t_game *game);
 void			**calloc_2d_array(size_t n_2d, size_t n_1d, size_t siz);

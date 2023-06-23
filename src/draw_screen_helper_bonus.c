@@ -6,7 +6,7 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 20:09:12 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/06/23 20:22:26 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/06/24 01:09:39 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	put_enemy_with_animation(t_game *game)
 {
 	static size_t	frame;
 	static size_t	cur_frame;
-	if (frame > 1)
+	if (frame > 55)
 	{
 		cur_frame = (cur_frame + 1) % ENEMY_FRAME;
 		frame = 0;
@@ -30,7 +30,7 @@ void	put_player_with_animation(t_game *game)
 {
 	static size_t	frame;
 	static size_t	cur_frame;
-	if (frame > 2)
+	if (frame > 15)
 	{
 		cur_frame = (cur_frame + 1) % PLAYER_FRAME;
 		frame = 0;

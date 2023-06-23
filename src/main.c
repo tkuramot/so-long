@@ -6,7 +6,7 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 15:18:43 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/06/23 20:23:07 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/06/24 02:17:53 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	main(int argc, char **argv)
 	}
 	mlx_hook(game.vars.win, ON_KEYDOWN, 1L << 0, event_handler, &game);
 	mlx_hook(game.vars.win, ON_DESTROY, 1L << 17, my_close, &game);
-	mlx_loop_hook(game.vars.mlx, draw_all, &game);
+	mlx_loop_hook(game.vars.mlx, update_per_frame, &game);
 	mlx_loop(game.vars.mlx);
 	return (0);
 }

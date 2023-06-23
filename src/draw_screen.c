@@ -6,7 +6,7 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 14:34:42 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/06/23 23:59:54 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/06/24 02:21:01 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	put_texture_to_window(t_vars *vars, void *img, t_coord coord)
 		coord.x * BLOCK_SIZE, coord.y * BLOCK_SIZE);
 }
 
-static void	put_object(t_game *game)
+void	put_object(t_game *game)
 {
 	size_t	row_idx;
 	size_t	column_idx;
@@ -51,7 +51,7 @@ static bool	is_empty_or_wall(t_game *game, t_coord coord)
 		&& !(is_same_coord(coord, game->enemy)));
 }
 
-static void	put_map(t_game *game)
+void	put_map(t_game *game)
 {
 	size_t	row_idx;
 	size_t	column_idx;
@@ -79,10 +79,3 @@ static void	put_map(t_game *game)
 	}
 }
 
-int	draw_all(t_game *game)
-{
-	put_map(game);
-	put_object(game);
-	put_sprite_with_animation(game);
-	return (0);
-}
