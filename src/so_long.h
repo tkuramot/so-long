@@ -6,7 +6,7 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 12:00:30 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/06/23 20:20:11 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/06/23 23:06:38 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,6 @@ typedef struct s_game
 }				t_game;
 
 bool			parse_map(t_game *game, char *map_file);
-void			initilizePlayerCoord(t_game *game);
 bool			is_valid_map(t_map *map);
 bool			is_surrounded_by_walls(t_map *map);
 bool			is_playable(t_map *map);
@@ -126,10 +125,12 @@ int				my_close(t_game *game);
 void			**calloc_2d_array(size_t n_2d, size_t n_1d, size_t siz);
 void			free_2d_array(void **array, size_t n);
 t_coord			find_chr_in_map(t_map *map, char c);
-bool			is_same_coord(t_coord c1, t_coord c2);
 void			replace_newline_with_null(char *s);
 void			destroy_textures(t_game * game);
 void			free_all_memory(t_game *game);
 void			print_error(char *s);
+bool			is_same_coord(t_coord c1, t_coord c2);
+void			initialize_player_coord(t_game *game);
+void			initialize_enemy_coord(t_game *game);
 
 #endif

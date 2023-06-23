@@ -46,11 +46,11 @@ LIBRARY = -L $(MLX_DIR) -l $(MLX) -L $(LIBFT_DIR) -l $(LIBFT) \
 OBJ_DIR = src/
 MSRCS = main.c parse_map.c validate_map.c validate_map_helper.c \
 	load_texture.c draw_screen.c draw_screen_helper.c \
-	handle_event.c utils.c exit.c
+	handle_event.c handle_coord.c utils.c exit.c
 MOBJS = $(addprefix $(OBJ_DIR), $(MSRCS:.c=.o))
 BSRCS = main.c parse_map.c validate_map.c validate_map_helper.c \
 	load_texture.c draw_screen.c draw_screen_helper_bonus.c \
-	handle_event.c utils.c exit.c
+	handle_event.c handle_coord_bonus.c utils.c exit.c
 BOBJS = $(addprefix $(OBJ_DIR), $(BSRCS:.c=.o))
 LIBFT = ft
 LIBFT_DIR = ./lib/libft
