@@ -6,7 +6,7 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 22:44:01 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/06/23 23:04:04 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/06/23 23:50:42 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,11 @@ bool	is_same_coord(t_coord c1, t_coord c2)
 	return (c1.y == c2.y && c1.x == c2.x);
 }
 
-void	initilizePlayerCoord(t_game *game)
+void	initialize_player_coord(t_game *game)
 {
 	t_coord	player;
 
 	player = find_chr_in_map(&game->map, PLAYER);
-	p
 	game->map.grid[player.y][player.x] = EMPTY;
 	game->player.x = player.x;
 	game->player.y = player.y;
@@ -31,29 +30,30 @@ void	initilizePlayerCoord(t_game *game)
 
 static bool is_valid_enemy_coord(t_game *game, t_coord enemy)
 {
-	return (game->map.grid[ry][rx] == EMPTY
-		&& !is_same_coord((t_coord){ry, rx}, game->player
-		&& !is_same_coord((t_coord){ry, rx}, game->enemy);
+	return (game->map.grid[enemy.y][enemy.x] == EMPTY
+		&& !is_same_coord(enemy, game->player)
+		&& !is_same_coord(enemy, game->enemy));
 }
 
-void    initilizeEnemyCoord(t_game *game)
+void    initialize_enemy_coord(t_game *game)
 {
 	size_t trial;
 	long long ry;
 	long long rx;
 
 	trial = 0;
-	srand((unsigned int)time(NULL));
-	ry = srand() % game->map.row;
-	ry = srand() % game->map.column;
-	while (!is_valid_enemy_coord(game, (t_coord){ry, rx}) && trial < 50)
+	ry = 0;
+	rx = 0;
+	while (true)
 	{
 		srand((unsigned int)time(NULL));
-		ry = srand() % game->map.row;
-		ry = srand() % game->map.column;
-		trial++;
+		ry = rand() % game->map.row;
+		rx = rand() % game->map.column;
+		if (is_valid_enemy_coord(game, (t_coord){ry, rx})
+			&& trial++ < game->map.row * game->map.column)
+			break;
 	}
-	if (!is_valid_enemy_coord(game, (t_coord){ry, rx})
+	if (!is_valid_enemy_coord(game, (t_coord){ry, rx}))
 	{
 		game->enemy.y = -1;
 		game->enemy.x = -1;
@@ -64,4 +64,3 @@ void    initilizeEnemyCoord(t_game *game)
 		game->enemy.x = rx;
 	}
 }
-

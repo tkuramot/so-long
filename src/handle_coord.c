@@ -6,7 +6,7 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 21:21:17 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/06/23 23:09:08 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/06/23 23:35:42 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ bool	is_same_coord(t_coord c1, t_coord c2)
 	return (c1.y == c2.y && c1.x == c2.x);
 }
 
-void	initializePlayerCoord(t_game *game)
+void	initialize_player_coord(t_game *game)
 {
 	t_coord	player;
 
@@ -26,8 +26,7 @@ void	initializePlayerCoord(t_game *game)
 	game->player.x = player.x;
 	game->player.y = player.y;
 }
-void    initializeEnemyCoord(t_game *game)
+void    initialize_enemy_coord(t_game *game)
 {
 	(void)game;
 }
-

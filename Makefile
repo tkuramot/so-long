@@ -43,7 +43,7 @@ CFLAGS = -Wall -Wextra -Werror
 INCLUDE = -I $(LIBFT_DIR)/include -I $(MLX_DIR)
 LIBRARY = -L $(MLX_DIR) -l $(MLX) -L $(LIBFT_DIR) -l $(LIBFT) \
 	-L/usr/X11R6/lib -lX11 -lXext
-OBJ_DIR = src/
+SRC_DIR = src/
 MSRCS = main.c parse_map.c validate_map.c validate_map_helper.c \
 	load_texture.c draw_screen.c draw_screen_helper.c \
 	handle_event.c handle_coord.c utils.c exit.c
@@ -59,23 +59,19 @@ MLX = mlx_Darwin
 
 all: $(NAME)
 
-$(NAME): $(MOBJS)
+$(NAME):
 	make -C $(LIBFT_DIR)
 	make -C $(MLX_DIR)
-	$(CC) $(CFLAGS) $(MOBJS) $(LIBRARY) -framework OpenGL -framework AppKit -o $@
+	$(CC) $(CFLAGS) $(addprefix $(SRC_DIR), $(MSRCS)) $(INCLUDE) $(LIBRARY) -framework OpenGL -framework AppKit -o $@
 
-bonus: $(BOBJS)
+bonus:
 	make -C $(LIBFT_DIR)
 	make -C $(MLX_DIR)
-	$(CC) $(CFLAGS) $(BOBJS) $(LIBRARY) -framework OpenGL -framework AppKit -o $(NAME)
-
-.c.o:
-	$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
+	$(CC) $(CFLAGS) $(addprefix $(SRC_DIR), $(BSRCS)) $(INCLUDE) $(LIBRARY) -framework OpenGL -framework AppKit -o $(NAME)
 
 clean:
 	make -C $(LIBFT_DIR) clean
 	make -C $(MLX_DIR) clean
-	$(RM) $(MOBJS) $(BOBJS)
 
 fclean: clean
 	make -C $(LIBFT_DIR) fclean
@@ -84,6 +80,8 @@ fclean: clean
 re: fclean all
 
 debug:
-	leaks -atExit -- ./so_long maps/default_map.ber > log
+	make -C $(LIBFT_DIR)
+	make -C $(MLX_DIR)
+	$(CC) -g -fsanitize=address $(CFLAGS) $(addprefix $(SRC_DIR), $(BSRCS)) $(INCLUDE) $(LIBRARY) -framework OpenGL -framework AppKit -o $(NAME)
 
 .PHONY: clean fclean re all
