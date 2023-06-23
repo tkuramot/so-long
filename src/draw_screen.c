@@ -6,7 +6,7 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 14:34:42 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/06/23 13:18:33 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/06/23 23:59:54 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,8 @@ static bool	is_empty_or_wall(t_game *game, t_coord coord)
 {
 	return ((game->map.grid[coord.y][coord.x] == EMPTY
 		|| game->map.grid[coord.y][coord.x] == WALL)
-		&& !(coord.y == game->player.y && coord.x == game->player.x));
+		&& !(is_same_coord(coord, game->player))
+		&& !(is_same_coord(coord, game->enemy)));
 }
 
 static void	put_map(t_game *game)

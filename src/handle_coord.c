@@ -6,7 +6,7 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 21:21:17 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/06/23 23:35:42 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/06/24 00:08:52 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,6 @@ void	initialize_player_coord(t_game *game)
 }
 void    initialize_enemy_coord(t_game *game)
 {
-	(void)game;
+	game->enemy.y = -1;
+	game->enemy.x = -1;
 }
