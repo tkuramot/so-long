@@ -40,35 +40,45 @@
 
 NAME = so_long
 CFLAGS = -Wall -Wextra -Werror
-INCLUDE = -I $(LIBFT_PATH)/include -I $(MLX_PATH)
-LIBRARY = -L $(MLX_PATH) -l $(MLX) -L $(LIBFT_PATH) -l $(LIBFT) \
+INCLUDE = -I $(LIBFT_DIR)/include -I $(MLX_DIR)
+LIBRARY = -L $(MLX_DIR) -l $(MLX) -L $(LIBFT_DIR) -l $(LIBFT) \
 	-L/usr/X11R6/lib -lX11 -lXext
-SRCS = main.c parse_map.c validate_map.c validate_map_helper.c \
-	load_texture.c draw_screen.c handle_event.c utils.c exit.c
-OBJS = $(SRCS:.c=.o)
+OBJ_DIR = src/
+MSRCS = main.c parse_map.c validate_map.c validate_map_helper.c \
+	load_texture.c draw_screen.c draw_screen_helper.c \
+	handle_event.c utils.c exit.c
+MOBJS = $(addprefix $(OBJ_DIR), $(MSRCS:.c=.o))
+BSRCS = main.c parse_map.c validate_map.c validate_map_helper.c \
+	load_texture.c draw_screen.c draw_screen_helper_bonus.c \
+	handle_event.c utils.c exit.c
+BOBJS = $(addprefix $(OBJ_DIR), $(BSRCS:.c=.o))
 LIBFT = ft
-LIBFT_PATH = ./lib/libft
-MLX_PATH = ./lib/minilibx-linux
+LIBFT_DIR = ./lib/libft
+MLX_DIR = ./lib/minilibx-linux
 MLX = mlx_Darwin
 
 all: $(NAME)
 
-$(NAME): $(addprefix src/, $(OBJS))
-	make -C $(LIBFT_PATH)
-	make -C $(MLX_PATH)
-	$(CC) $(CFLAGS) $(addprefix src/, $(OBJS)) $(LIBRARY) -framework OpenGL -framework AppKit -o $(NAME)
+$(NAME): $(MOBJS)
+	make -C $(LIBFT_DIR)
+	make -C $(MLX_DIR)
+	$(CC) $(CFLAGS) $(MOBJS) $(LIBRARY) -framework OpenGL -framework AppKit -o $@
 
-.c.o: $(addprefix src/, $(OBJS))
+bonus: $(BOBJS)
+	make -C $(LIBFT_DIR)
+	make -C $(MLX_DIR)
+	$(CC) $(CFLAGS) $(BOBJS) $(LIBRARY) -framework OpenGL -framework AppKit -o $(NAME)
+
+.c.o:
 	$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
-	# /opt/homebrew/bin/gcc-13 -g -fsanitize=leak $(CFLAGS) $(INCLUDE) -c $< -o $@
 
 clean:
-	make -C $(LIBFT_PATH) clean
-	make -C $(MLX_PATH) clean
-	$(RM) $(OBJS) $(addprefix src/, $(OBJS))
+	make -C $(LIBFT_DIR) clean
+	make -C $(MLX_DIR) clean
+	$(RM) $(MOBJS) $(BOBJS)
 
 fclean: clean
-	make -C $(LIBFT_PATH) fclean
+	make -C $(LIBFT_DIR) fclean
 	$(RM) $(NAME)
 
 re: fclean all

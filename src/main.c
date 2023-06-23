@@ -6,7 +6,7 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 15:18:43 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/06/22 17:12:13 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/06/23 20:23:07 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ int	main(int argc, char **argv)
 	ft_bzero(&game, sizeof (t_game));
 	if (!parse_map(&game, argv[1]))
 		return (0);
-	initilizePlayerCoord(&game);
 	game.vars.mlx = mlx_init();
 	game.vars.win = mlx_new_window(game.vars.mlx,
 		game.map.column * BLOCK_SIZE, game.map.row * BLOCK_SIZE, "./so_long");

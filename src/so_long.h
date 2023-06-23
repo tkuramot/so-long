@@ -6,7 +6,7 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 12:00:30 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/06/22 22:21:39 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/06/23 20:20:11 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,12 @@
 # define EXIT_PATH "./textures/tiles/exit.xpm"
 # define PLAYER1_PATH "./textures/sprites/player1.xpm"
 # define PLAYER2_PATH "./textures/sprites/player2.xpm"
+# define PLAYER_FRAME 2
+# define ENEMY1_PATH "./textures/sprites/enemy1.xpm"
+# define ENEMY2_PATH "./textures/sprites/enemy2.xpm"
+# define ENEMY3_PATH "./textures/sprites/enemy3.xpm"
+# define ENEMY4_PATH "./textures/sprites/enemy4.xpm"
+# define ENEMY_FRAME 4
 
 typedef enum	e_char
 {
@@ -43,7 +49,11 @@ typedef enum	e_idx_texture
 	IDX_COLLECTIBLE,
 	IDX_EXIT,
 	IDX_PLAYER1,
-	IDX_PLAYER2
+	IDX_PLAYER2,
+	IDX_ENEMY1,
+	IDX_ENEMY2,
+	IDX_ENEMY3,
+	IDX_ENEMY4
 }				t_idx_texture;
 
 
@@ -89,7 +99,7 @@ typedef struct s_map
 typedef struct s_textures
 {
 	size_t	counter;
-	void	*containers[6];
+	void	*containers[10];
 }				t_textures;
 
 typedef struct s_game
@@ -99,6 +109,7 @@ typedef struct s_game
 	t_map		map;
 	t_textures	textures;
 	t_coord		player;
+	t_coord		enemy;
 }				t_game;
 
 bool			parse_map(t_game *game, char *map_file);
@@ -108,6 +119,8 @@ bool			is_surrounded_by_walls(t_map *map);
 bool			is_playable(t_map *map);
 bool			load_textures(t_game *game);
 int				draw_all(t_game *game);
+void			put_sprite_with_animation(t_game *game);
+void			put_texture_to_window(t_vars *vars, void *img, t_coord coord);
 int				event_handler(int keycode, t_game *game);
 int				my_close(t_game *game);
 void			**calloc_2d_array(size_t n_2d, size_t n_1d, size_t siz);

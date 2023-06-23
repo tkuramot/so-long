@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_parser.c                                       :+:      :+:    :+:   */
+/*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 12:24:05 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/06/22 17:12:30 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/06/23 20:24:11 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,10 @@ void	initilizePlayerCoord(t_game *game)
 	game->map.grid[player.y][player.x] = EMPTY;
 	game->player.x = player.x;
 	game->player.y = player.y;
+}
+
+void	initializeEnemyCoord(t_game *game)
+{
 }
 
 t_coord	find_chr_in_map(t_map *map, char c)
@@ -77,5 +81,6 @@ bool	parse_map(t_game *game, char *map_file)
 		return (false);
 	if (!is_valid_map(&game->map))
 		return (false);
+	initilizePlayerCoord(&game);
 	return (true);
 }
