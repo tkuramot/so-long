@@ -6,7 +6,7 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 22:44:01 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/06/24 17:28:13 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/06/24 17:57:14 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,10 @@ void	initialize_enemy_coord(t_game *game)
 	trial = 0;
 	ry = 0;
 	rx = 0;
-	while (is_valid_enemy_coord(game, (t_coord){ry, rx})
+	srand((unsigned int)time(NULL));
+	while (!is_valid_enemy_coord(game, (t_coord){ry, rx})
 			&& trial++ < game->map.row * game->map.column)
 	{
-		srand((unsigned int)time(NULL));
 		ry = rand() % game->map.row;
 		rx = rand() % game->map.column;
 	}
