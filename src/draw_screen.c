@@ -6,7 +6,7 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 14:34:42 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/06/24 16:55:21 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/06/24 17:26:07 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static bool	is_empty_or_wall(t_game *game, t_coord coord)
 				game->enemy)));
 }
 
-static void		put_map_helper(t_game *game, size_t row_idx, size_t column_idx)
+static void	put_map_helper(t_game *game, size_t row_idx, size_t column_idx)
 {
 	if (game->map.grid[row_idx][column_idx] == WALL)
 		put_texture_to_window(&game->vars, game->textures.containers[IDX_WALL],

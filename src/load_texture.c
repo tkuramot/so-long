@@ -6,7 +6,7 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 17:29:27 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/06/24 15:55:08 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/06/24 17:27:04 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static bool	load_texture(t_game *game, t_idx_texture idx, char *texture_path)
 	int	height;
 
 	game->textures.containers[idx] = mlx_xpm_file_to_image(game->vars.mlx,
-		texture_path, &width, &height);
+			texture_path, &width, &height);
 	if (!game->textures.containers[idx])
 	{
 		destroy_textures(game);

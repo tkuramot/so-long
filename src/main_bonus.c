@@ -6,7 +6,7 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/24 14:24:24 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/06/24 14:26:30 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/06/24 16:56:53 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	main(int argc, char **argv)
 		return (0);
 	game.vars.mlx = mlx_init();
 	game.vars.win = mlx_new_window(game.vars.mlx, game.map.column * BLOCK_SIZE,
-		(game.map.row + 1) * BLOCK_SIZE, "./so_long");
+			(game.map.row + 1) * BLOCK_SIZE, "./so_long");
 	if (!load_textures(&game))
 	{
 		ft_printf("Failed in loading textures\n");
