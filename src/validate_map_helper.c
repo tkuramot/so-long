@@ -16,18 +16,20 @@ static void	dfs(t_map *map, bool **seen, t_coord v)
 {
 	size_t		d;
 	t_coord		nv;
-	const int	dy[4] = {-1, 0, 1, 0};
-	const int	dx[4] = {0, 1, 0, -1};
+	const int	dy[4];
+	const int	dx[4];
 
+	dy[4] = {-1, 0, 1, 0};
+	dx[4] = {0, 1, 0, -1};
 	seen[v.y][v.x] = true;
 	d = 0;
 	while (d < 4)
 	{
 		nv.x = v.x + dx[d];
 		nv.y = v.y + dy[d];
-		if (nv.x < 0 || nv.x >= (long long)map->column
-			|| nv.y < 0 || nv.y >= (long long)map->row
-			|| map->grid[nv.y][nv.x] == WALL || seen[nv.y][nv.x])
+		if (nv.x < 0 || nv.x >= (long long)map->column || nv.y < 0
+			|| nv.y >= (long long)map->row || map->grid[nv.y][nv.x] == WALL
+			|| seen[nv.y][nv.x])
 		{
 			d++;
 			continue ;
@@ -43,7 +45,7 @@ static bool	is_reachable(char start, char end, t_map *map)
 	bool	result;
 	t_coord	end_coord;
 
-	seen = (bool **)calloc_2d_array(map->row, map->column, sizeof (bool));
+	seen = (bool **)calloc_2d_array(map->row, map->column, sizeof(bool));
 	if (!seen)
 		return (false);
 	dfs(map, seen, find_chr_in_map(map, start));
@@ -57,6 +59,6 @@ static bool	is_reachable(char start, char end, t_map *map)
 // the collectible is collectible
 bool	is_playable(t_map *map)
 {
-	return (is_reachable(PLAYER, EXIT, map)
-		&& is_reachable(PLAYER, COLLECTIBLE, map));
+	return (is_reachable(PLAYER, EXIT, map) && is_reachable(PLAYER, COLLECTIBLE,
+			map));
 }

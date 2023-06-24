@@ -20,7 +20,7 @@ static char	**read_file(int fd, size_t row_idx)
 
 	row = get_next_line(fd);
 	if (!row)
-		return ((char **)ft_calloc(row_idx + 1, sizeof (char *)));
+		return ((char **)ft_calloc(row_idx + 1, sizeof(char *)));
 	grid = read_file(fd, row_idx + 1);
 	if (!grid)
 	{
@@ -54,7 +54,7 @@ t_coord	find_chr_in_map(t_map *map, char c)
 
 bool	parse_map(t_game *game, char *map_file)
 {
-	int		fd;
+	int	fd;
 
 	fd = open(map_file, O_RDONLY);
 	if (fd < 0)

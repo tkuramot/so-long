@@ -28,18 +28,17 @@ void	initialize_player_coord(t_game *game)
 	game->player.y = player.y;
 }
 
-static bool is_valid_enemy_coord(t_game *game, t_coord enemy)
+static bool	is_valid_enemy_coord(t_game *game, t_coord enemy)
 {
-	return (game->map.grid[enemy.y][enemy.x] == EMPTY
-		&& !is_same_coord(enemy, game->player)
-		&& !is_same_coord(enemy, game->enemy));
+	return (game->map.grid[enemy.y][enemy.x] == EMPTY && !is_same_coord(enemy,
+			game->player) && !is_same_coord(enemy, game->enemy));
 }
 
-void    initialize_enemy_coord(t_game *game)
+void	initialize_enemy_coord(t_game *game)
 {
-	size_t trial;
-	long long ry;
-	long long rx;
+	size_t		trial;
+	long long	ry;
+	long long	rx;
 
 	trial = 0;
 	ry = 0;
@@ -51,7 +50,7 @@ void    initialize_enemy_coord(t_game *game)
 		rx = rand() % game->map.column;
 		if (is_valid_enemy_coord(game, (t_coord){ry, rx})
 			&& trial++ < game->map.row * game->map.column)
-			break;
+			break ;
 	}
 	if (!is_valid_enemy_coord(game, (t_coord){ry, rx}))
 	{

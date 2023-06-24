@@ -16,13 +16,14 @@ void	put_enemy_with_animation(t_game *game)
 {
 	static size_t	frame;
 	static size_t	cur_frame;
+
 	if (frame > 55)
 	{
 		cur_frame = (cur_frame + 1) % ENEMY_FRAME;
 		frame = 0;
 	}
-	put_texture_to_window(&game->vars,
-		game->textures.containers[IDX_ENEMY1 + cur_frame], game->enemy);
+	put_texture_to_window(&game->vars, game->textures.containers[IDX_ENEMY1
+		+ cur_frame], game->enemy);
 	frame++;
 }
 
@@ -30,13 +31,14 @@ void	put_player_with_animation(t_game *game)
 {
 	static size_t	frame;
 	static size_t	cur_frame;
+
 	if (frame > 15)
 	{
 		cur_frame = (cur_frame + 1) % PLAYER_FRAME;
 		frame = 0;
 	}
-	put_texture_to_window(&game->vars,
-		game->textures.containers[IDX_PLAYER1 + cur_frame], game->player);
+	put_texture_to_window(&game->vars, game->textures.containers[IDX_PLAYER1
+		+ cur_frame], game->player);
 	frame++;
 }
 

@@ -14,6 +14,6 @@
 
 void	put_sprite_with_animation(t_game *game)
 {
-	put_texture_to_window(&game->vars,
-		game->textures.containers[IDX_PLAYER1], game->player);
+	put_texture_to_window(&game->vars, game->textures.containers[IDX_PLAYER1],
+		game->player);
 }

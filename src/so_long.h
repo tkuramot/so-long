@@ -6,7 +6,7 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 12:00:30 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/06/24 02:22:31 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/06/24 15:50:56 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@
 # define ENEMY3_PATH "./textures/sprites/enemy3.xpm"
 # define ENEMY4_PATH "./textures/sprites/enemy4.xpm"
 # define ENEMY_FRAME 4
+# define NUMBER_PATH "./textures/numbers/number_0.xpm"
+# define NUMBER_WIDTH 16
 
 typedef enum	e_char
 {
@@ -53,7 +55,8 @@ typedef enum	e_idx_texture
 	IDX_ENEMY1,
 	IDX_ENEMY2,
 	IDX_ENEMY3,
-	IDX_ENEMY4
+	IDX_ENEMY4,
+	IDX_NUMBER
 }				t_idx_texture;
 
 
@@ -99,7 +102,7 @@ typedef struct s_map
 typedef struct s_textures
 {
 	size_t	counter;
-	void	*containers[10];
+	void	*containers[20];
 }				t_textures;
 
 typedef struct s_game
@@ -118,6 +121,8 @@ bool			is_surrounded_by_walls(t_map *map);
 bool			is_playable(t_map *map);
 bool			load_textures(t_game *game);
 int				update_per_frame(t_game *game);
+int				move_player(int keycode, t_game *game);
+void			resolve_action(t_game *game, t_coord player);
 void			put_sprite_with_animation(t_game *game);
 void			put_texture_to_window(t_vars *vars, void *img, t_coord coord);
 void			put_object(t_game *game);

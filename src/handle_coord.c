@@ -26,7 +26,7 @@ void	initialize_player_coord(t_game *game)
 	game->player.x = player.x;
 	game->player.y = player.y;
 }
-void    initialize_enemy_coord(t_game *game)
+void	initialize_enemy_coord(t_game *game)
 {
 	game->enemy.y = -1;
 	game->enemy.x = -1;

@@ -17,7 +17,7 @@ void	**calloc_2d_array(size_t n_2d, size_t n_1d, size_t siz)
 	void	**array;
 	size_t	row_idx;
 
-	array = (void **)ft_calloc(n_2d, sizeof (void *));
+	array = (void **)ft_calloc(n_2d, sizeof(void *));
 	row_idx = 0;
 	while (row_idx < n_2d)
 	{

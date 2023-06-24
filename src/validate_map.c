@@ -20,16 +20,16 @@ bool	is_surrounded_by_walls(t_map *map)
 	column_idx = 0;
 	while (column_idx < map->column)
 	{
-		if (map->grid[0][column_idx] != WALL
-			|| map->grid[map->row - 1][column_idx] != WALL)
+		if (map->grid[0][column_idx] != WALL || map->grid[map->row
+			- 1][column_idx] != WALL)
 			return (false);
 		column_idx++;
 	}
 	row_idx = 0;
 	while (row_idx < map->row)
 	{
-		if ((map->grid[row_idx][0] != WALL)
-			|| (map->grid[row_idx][map->column - 1] != WALL))
+		if ((map->grid[row_idx][0] != WALL) || (map->grid[row_idx][map->column
+				- 1] != WALL))
 			return (false);
 		row_idx++;
 	}
@@ -49,8 +49,7 @@ static bool	is_valid_charset(unsigned char *charset)
 			return (false);
 		c++;
 	}
-	return ((charset[EXIT] == 1)
-		&& (charset[COLLECTIBLE] >= 1)
+	return ((charset[EXIT] == 1) && (charset[COLLECTIBLE] >= 1)
 		&& (charset[PLAYER] == 1));
 }
 
@@ -61,7 +60,7 @@ static bool	has_valid_chars(t_map *map)
 	size_t			row_idx;
 	size_t			column_idx;
 
-	ft_bzero(charset, sizeof (unsigned char) * (UCHAR_MAX + 1));
+	ft_bzero(charset, sizeof(unsigned char) * (UCHAR_MAX + 1));
 	row_idx = 0;
 	while (row_idx < map->row)
 	{
