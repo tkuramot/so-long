@@ -6,7 +6,7 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/24 17:26:42 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/06/24 17:26:43 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/06/24 19:52:20 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,13 +81,17 @@ static bool	has_valid_rows_and_columns(t_map *map)
 	char	**grid;
 	size_t	row;
 	size_t	column;
+	bool	ok;
 
+	ok = true;
 	grid = map->grid;
 	row = 0;
 	column = ft_strlen_s(grid[row]);
 	while (grid[++row])
+	{
 		if (column != ft_strlen_s(grid[row]))
-			return (false);
+			ok = false;
+	}
 	map->row = row;
 	map->column = column;
 	return (true);

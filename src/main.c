@@ -6,11 +6,18 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 15:18:43 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/06/24 17:25:45 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/06/24 19:58:40 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+/*
+__attribute__((destructor)) static void destructor()
+{
+	system("leaks -q so_long");
+}
+*/
 
 int	main(int argc, char **argv)
 {
