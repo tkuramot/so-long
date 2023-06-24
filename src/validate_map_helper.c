@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_validator_helper.c                             :+:      :+:    :+:   */
+/*   validate_map_helper.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 13:51:27 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/06/22 10:10:35 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/06/24 17:32:50 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,9 @@ static void	dfs(t_map *map, bool **seen, t_coord v)
 {
 	size_t		d;
 	t_coord		nv;
-	const int	dy[4];
-	const int	dx[4];
+	const int	dy[] = {-1, 0, 1, 0};
+	const int	dx[] = {0, 1, 0, -1};
 
-	dy[4] = {-1, 0, 1, 0};
-	dx[4] = {0, 1, 0, -1};
 	seen[v.y][v.x] = true;
 	d = 0;
 	while (d < 4)

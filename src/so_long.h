@@ -6,7 +6,7 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 12:00:30 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/06/24 15:50:56 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/06/24 17:25:25 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@
 # define NUMBER_PATH "./textures/numbers/number_0.xpm"
 # define NUMBER_WIDTH 16
 
-typedef enum	e_char
+typedef enum e_char
 {
 	EMPTY = '0',
 	WALL = '1',
@@ -44,7 +44,7 @@ typedef enum	e_char
 	PLAYER = 'P'
 }				t_char;
 
-typedef enum	e_idx_texture
+typedef enum e_idx_texture
 {
 	IDX_EMPTY,
 	IDX_WALL,
@@ -59,8 +59,7 @@ typedef enum	e_idx_texture
 	IDX_NUMBER
 }				t_idx_texture;
 
-
-typedef enum	e_event
+typedef enum e_event
 {
 	ON_KEYDOWN = 2,
 	ON_KEYUP = 3,
@@ -71,7 +70,7 @@ typedef enum	e_event
 	ON_DESTROY = 17
 }				t_event;
 
-typedef enum	e_keycode
+typedef enum e_keycode
 {
 	ESC = 65307,
 	UP = 119,
@@ -133,7 +132,7 @@ void			**calloc_2d_array(size_t n_2d, size_t n_1d, size_t siz);
 void			free_2d_array(void **array, size_t n);
 t_coord			find_chr_in_map(t_map *map, char c);
 void			replace_newline_with_null(char *s);
-void			destroy_textures(t_game * game);
+void			destroy_textures(t_game *game);
 void			free_all_memory(t_game *game);
 void			print_error(char *s);
 bool			is_same_coord(t_coord c1, t_coord c2);
