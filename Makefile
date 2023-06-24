@@ -48,9 +48,9 @@ MSRCS = main.c parse_map.c validate_map.c validate_map_helper.c \
 	load_texture.c update_per_frame.c draw_screen.c draw_screen_helper.c \
 	handle_event.c handle_coord.c utils.c exit.c
 MOBJS = $(addprefix $(OBJ_DIR), $(MSRCS:.c=.o))
-BSRCS = main.c parse_map.c validate_map.c validate_map_helper.c \
+BSRCS = main_bonus.c parse_map.c validate_map.c validate_map_helper.c \
 	load_texture.c update_per_frame_bonus.c draw_screen.c draw_screen_helper_bonus.c \
-	handle_event_bonus.c handle_coord_bonus.c move_enemy_bonus.c utils.c exit.c
+	handle_event_bonus.c handle_coord_bonus.c utils.c exit.c
 BOBJS = $(addprefix $(OBJ_DIR), $(BSRCS:.c=.o))
 LIBFT = ft
 LIBFT_DIR = ./lib/libft

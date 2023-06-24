@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+#include "libft.h"
 
 static char	*read_new_line(int fd, char *line, char **rest);
 static int	concat_line(char **line, char *buffer, char **rest);
