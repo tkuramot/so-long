@@ -6,7 +6,7 @@
 /*   By: tkuramot <tkuramot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/24 02:23:45 by tkuramot          #+#    #+#             */
-/*   Updated: 2023/06/24 16:44:04 by tkuramot         ###   ########.fr       */
+/*   Updated: 2023/06/24 17:33:09 by tkuramot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,9 @@ static void	move_enemy(t_game *game)
 {
 	static size_t	frame;
 	int				d;
-	const int		dy[];
-	const int		dx[];
+	const int	dy[] = {-1, 0, 1, 0};
+	const int	dx[] = {0, 1, 0, -1};
 
-	dy[] = {-1, 0, 1, 0};
-	dx[] = {0, 1, 0, -1};
 	if (game->enemy.y == -1 && game->enemy.x == -1)
 		return ;
 	d = rand() % 4;
