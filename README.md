@@ -1,7 +1,7 @@
 # so-long
 ### Description
 42の課題で制作した2Dの脱出ゲームです。指定のフォーマットのマップファイルを読み取り描画します。
-```bash: medium_map.ber
+```bash
 1111111111111
 10010000000C1
 1000011111001
@@ -18,4 +18,5 @@
 git clone https://github.com/K4-R4/so-long
 cd so-long
 make
+./so_long maps/medium_map.ber
 ```
