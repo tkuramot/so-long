@@ -47,4 +47,9 @@ fclean: clean
 
 re: fclean all
 
+debug: $(OBJS)
+	make -C $(LIBFT_DIR)
+	make -C $(MLX_DIR)
+	$(CC) -g -fsanitize=address $(CFLAGS) $(OBJS) $(INCLUDE) $(LIBRARY) -framework OpenGL -framework AppKit -o $(NAME)
+
 .PHONY: clean fclean re all
