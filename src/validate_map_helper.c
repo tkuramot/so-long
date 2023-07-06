@@ -23,13 +23,33 @@ static t_coord	*dup_coord(t_coord v)
 	return (nv);
 }
 
-static void	dfs(t_map *map, bool **seen, t_coord *v, char *passable)
+static void	check_cross(t_map *map, bool **seen, t_list *queue, char *passable)
 {
-	t_list		*queue;
 	size_t		d;
 	t_coord		nv;
 	const int	dy[] = {-1, 0, 1, 0};
 	const int	dx[] = {0, 1, 0, -1};
+
+	d = 0;
+	while (d < 4)
+	{
+		nv.x = ((t_coord *)queue->content)->x + dx[d];
+		nv.y = ((t_coord *)queue->content)->y + dy[d];
+		if (0 <= nv.x && nv.x < (long long)map->column && 0 <= nv.y
+			&& nv.y < (long long)map->row && ft_strchr(passable, map->grid[nv.y][nv.x])
+			&& !seen[nv.y][nv.x])
+		{
+			seen[nv.y][nv.x] = true;
+			ft_lstadd_back(&queue, ft_lstnew(dup_coord(nv)));
+		}
+		d++;
+	}
+}
+
+static void	bfs(t_map *map, bool **seen, t_coord *v, char *passable)
+{
+	t_list		*queue;
+	t_list		*node;
 
 	queue = ft_lstnew(v);
 	if (!queue)
@@ -37,23 +57,10 @@ static void	dfs(t_map *map, bool **seen, t_coord *v, char *passable)
 	seen[v->y][v->x] = true;
 	while (queue)
 	{
-		ft_printf("%d %d\n", ((t_coord *)queue->content)->y, ((t_coord *)queue->content)->x);
-		d = 0;
-		while (d < 4)
-		{
-			nv.x = ((t_coord *)queue->content)->x + dx[d];
-			nv.y = ((t_coord *)queue->content)->y + dy[d];
-			// seen[((t_coord *)queue->content)->y][((t_coord *)queue->content)->x] = true;
-			if (0 <= nv.x && nv.x < (long long)map->column && 0 <= nv.y
-				&& nv.y < (long long)map->row && ft_strchr(passable, map->grid[nv.y][nv.x])
-				&& !seen[nv.y][nv.x])
-			{
-				seen[nv.y][nv.x] = true;
-				ft_lstadd_back(&queue, ft_lstnew(dup_coord(nv)));
-			}
-			d++;
-		}
+		check_cross(map, seen, queue, passable);
+		node = queue;
 		queue = queue->next;
+		ft_lstdelone(node, free);
 	}
 }
 
@@ -65,7 +72,7 @@ static bool	is_reachable(t_coord start, t_coord end, char *passable, t_map *map)
 	seen = (bool **)calloc_2d_array(map->row, map->column, sizeof(bool));
 	if (!seen)
 		return (false);
-	dfs(map, seen, dup_coord(start), passable);
+	bfs(map, seen, dup_coord(start), passable);
 	result = seen[end.y][end.x];
 	free_2d_array((void **)seen, map->row);
 	return (result);
