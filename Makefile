@@ -26,7 +26,7 @@ endif
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	make -C $(LIBFT_DIR)
+	make -C $(LIBFT_DIR) bonus
 	make -C $(MLX_DIR)
 	$(CC) $(CFLAGS) $(OBJS) $(INCLUDE) $(LIBRARY) -framework OpenGL -framework AppKit -o $@
 

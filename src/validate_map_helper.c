@@ -12,32 +12,52 @@
 
 #include "so_long.h"
 
-static void	dfs(t_map *map, bool **seen, t_coord v)
+static t_coord	*dup_coord(t_coord v)
 {
+	t_coord	*nv;
+
+	nv = ft_calloc(1, sizeof (t_coord));
+	if (!nv)
+		return (false);
+	ft_memcpy(nv, &v, sizeof (t_coord));
+	return (nv);
+}
+
+static void	dfs(t_map *map, bool **seen, t_coord *v, char *passable)
+{
+	t_list		*queue;
 	size_t		d;
 	t_coord		nv;
 	const int	dy[] = {-1, 0, 1, 0};
 	const int	dx[] = {0, 1, 0, -1};
 
-	seen[v.y][v.x] = true;
-	d = 0;
-	while (d < 4)
+	queue = ft_lstnew(v);
+	if (!queue)
+		return ;
+	seen[v->y][v->x] = true;
+	while (queue)
 	{
-		nv.x = v.x + dx[d];
-		nv.y = v.y + dy[d];
-		if (nv.x < 0 || nv.x >= (long long)map->column || nv.y < 0
-			|| nv.y >= (long long)map->row || map->grid[nv.y][nv.x] == WALL
-			|| seen[nv.y][nv.x])
+		ft_printf("%d %d\n", ((t_coord *)queue->content)->y, ((t_coord *)queue->content)->x);
+		d = 0;
+		while (d < 4)
 		{
+			nv.x = ((t_coord *)queue->content)->x + dx[d];
+			nv.y = ((t_coord *)queue->content)->y + dy[d];
+			// seen[((t_coord *)queue->content)->y][((t_coord *)queue->content)->x] = true;
+			if (0 <= nv.x && nv.x < (long long)map->column && 0 <= nv.y
+				&& nv.y < (long long)map->row && ft_strchr(passable, map->grid[nv.y][nv.x])
+				&& !seen[nv.y][nv.x])
+			{
+				seen[nv.y][nv.x] = true;
+				ft_lstadd_back(&queue, ft_lstnew(dup_coord(nv)));
+			}
 			d++;
-			continue ;
 		}
-		dfs(map, seen, (t_coord){nv.y, nv.x});
-		d++;
+		queue = queue->next;
 	}
 }
 
-static bool	is_reachable(t_coord start, t_coord end, t_map *map)
+static bool	is_reachable(t_coord start, t_coord end, char *passable, t_map *map)
 {
 	bool	**seen;
 	bool	result;
@@ -45,7 +65,7 @@ static bool	is_reachable(t_coord start, t_coord end, t_map *map)
 	seen = (bool **)calloc_2d_array(map->row, map->column, sizeof(bool));
 	if (!seen)
 		return (false);
-	dfs(map, seen, start);
+	dfs(map, seen, dup_coord(start), passable);
 	result = seen[end.y][end.x];
 	free_2d_array((void **)seen, map->row);
 	return (result);
@@ -58,7 +78,7 @@ bool	is_playable(t_map *map)
 	size_t	row_idx;
 	size_t	column_idx;
 
-	if (!is_reachable(find_chr_in_map(map, PLAYER), find_chr_in_map(map, EXIT), map))
+	if (!is_reachable(find_chr_in_map(map, PLAYER), find_chr_in_map(map, EXIT), "0EC", map))
 		return (false);
 	row_idx = 0;
 	while (row_idx < map->row)
@@ -68,7 +88,7 @@ bool	is_playable(t_map *map)
 		{
 			if (map->grid[row_idx][column_idx] == COLLECTIBLE)
 			{
-				if (!is_reachable(find_chr_in_map(map, PLAYER), (t_coord){row_idx, column_idx}, map))
+				if (!is_reachable(find_chr_in_map(map, PLAYER), (t_coord){row_idx, column_idx}, "0C", map))
 					return (false);
 			}
 			column_idx++;
