@@ -37,18 +37,16 @@ static void	dfs(t_map *map, bool **seen, t_coord v)
 	}
 }
 
-static bool	is_reachable(char start, char end, t_map *map)
+static bool	is_reachable(t_coord start, t_coord end, t_map *map)
 {
 	bool	**seen;
 	bool	result;
-	t_coord	end_coord;
 
 	seen = (bool **)calloc_2d_array(map->row, map->column, sizeof(bool));
 	if (!seen)
 		return (false);
-	dfs(map, seen, find_chr_in_map(map, start));
-	end_coord = find_chr_in_map(map, end);
-	result = seen[end_coord.y][end_coord.x];
+	dfs(map, seen, start);
+	result = seen[end.y][end.x];
 	free_2d_array((void **)seen, map->row);
 	return (result);
 }
@@ -57,6 +55,25 @@ static bool	is_reachable(char start, char end, t_map *map)
 // the collectible is collectible
 bool	is_playable(t_map *map)
 {
-	return (is_reachable(PLAYER, EXIT, map) && is_reachable(PLAYER, COLLECTIBLE,
-			map));
+	size_t	row_idx;
+	size_t	column_idx;
+
+	if (!is_reachable(find_chr_in_map(map, PLAYER), find_chr_in_map(map, EXIT), map))
+		return (false);
+	row_idx = 0;
+	while (row_idx < map->row)
+	{
+		column_idx = 0;
+		while (column_idx < map->column)
+		{
+			if (map->grid[row_idx][column_idx] == COLLECTIBLE)
+			{
+				if (!is_reachable(find_chr_in_map(map, PLAYER), (t_coord){row_idx, column_idx}, map))
+					return (false);
+			}
+			column_idx++;
+		}
+		row_idx++;
+	}
+	return (true);
 }
