@@ -35,8 +35,9 @@ static void	check_cross(t_map *map, bool **seen, t_list *queue, char *passable)
 	{
 		nv.x = ((t_coord *)queue->content)->x + dx[d];
 		nv.y = ((t_coord *)queue->content)->y + dy[d];
-		if (0 <= nv.x && nv.x < (long long)map->column && 0 <= nv.y
-			&& nv.y < (long long)map->row && ft_strchr(passable, map->grid[nv.y][nv.x])
+		if (0 <= nv.x && nv.x < (long long)map->column
+			&& 0 <= nv.y && nv.y < (long long)map->row
+			&& ft_strchr(passable, map->grid[nv.y][nv.x])
 			&& !seen[nv.y][nv.x])
 		{
 			seen[nv.y][nv.x] = true;
@@ -64,7 +65,8 @@ static void	bfs(t_map *map, bool **seen, t_coord *v, char *passable)
 	}
 }
 
-static bool	is_reachable(t_coord start, t_coord end, char *passable, t_map *map)
+static bool	is_reachable(t_coord start, t_coord end,
+			char *passable, t_map *map)
 {
 	bool	**seen;
 	bool	result;
@@ -85,7 +87,8 @@ bool	is_playable(t_map *map)
 	size_t	row_idx;
 	size_t	column_idx;
 
-	if (!is_reachable(find_chr_in_map(map, PLAYER), find_chr_in_map(map, EXIT), "0EC", map))
+	if (!is_reachable(find_chr_in_map(map, PLAYER),
+			find_chr_in_map(map, EXIT), "0EC", map))
 		return (false);
 	row_idx = 0;
 	while (row_idx < map->row)
@@ -95,7 +98,8 @@ bool	is_playable(t_map *map)
 		{
 			if (map->grid[row_idx][column_idx] == COLLECTIBLE)
 			{
-				if (!is_reachable(find_chr_in_map(map, PLAYER), (t_coord){row_idx, column_idx}, "0C", map))
+				if (!is_reachable(find_chr_in_map(map, PLAYER),
+						(t_coord){row_idx, column_idx}, "0C", map))
 					return (false);
 			}
 			column_idx++;
